@@ -1,58 +1,38 @@
-import 'package:json_annotation/json_annotation.dart';
+import 'hero_network_entity.dart';
 
-part 'http_paged_result.g.dart';
-
-@JsonSerializable()
+/// DTO que mapeia o envelope de resposta paginada da API local (Aula 06).
 class HttpPagedResult {
-  int first;
-  dynamic prev;
-  int next;
-  int last;
-  int pages;
-  int items;
-  List<MovieEntity> data;
+  final int first;
+  final dynamic prev;
+  final int? next;
+  final int last;
+  final int pages;
+  final int items;
+  final List<HeroNetworkEntity> data;
 
   HttpPagedResult({
     required this.first,
     required this.prev,
-    required this.next,
+    this.next,
     required this.last,
     required this.pages,
     required this.items,
     required this.data,
   });
 
-  factory HttpPagedResult.fromJson(Map<String, dynamic> json) => _$HttpPagedResultFromJson(json);
-}
-
-@JsonSerializable()
-class MovieEntity {
-  String title;
-  int year;
-  List<String> cast;
-  List<String> genres;
-  String? href;
-  String? extract;
-  String? thumbnail;
-  int? thumbnailWidth;
-  int? thumbnailHeight;
-
-  MovieEntity({
-    required this.title,
-    required this.year,
-    required this.cast,
-    required this.genres,
-    this.href,
-    this.extract,
-    this.thumbnail,
-    this.thumbnailWidth,
-    this.thumbnailHeight,
-  });
-
-  factory MovieEntity.fromJson(Map<String, dynamic> json) => _$MovieEntityFromJson(json);
-
-  @override
-  String toString() {
-    return 'MovieEntity{title: $title, year: $year}';
+  /// Converte o Map da resposta paginada em objeto tipado com a lista de heróis.
+  factory HttpPagedResult.fromJson(Map<String, dynamic> json) {
+    return HttpPagedResult(
+      first: json['first'] as int? ?? 1,
+      prev: json['prev'],
+      next: json['next'] as int?,
+      last: json['last'] as int? ?? 1,
+      pages: json['pages'] as int? ?? 1,
+      items: json['items'] as int? ?? 0,
+      data: (json['data'] as List<dynamic>?)
+              ?.map((e) => HeroNetworkEntity.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          [],
+    );
   }
 }

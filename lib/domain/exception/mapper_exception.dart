@@ -6,6 +6,6 @@ class MapperException<From, To> implements Exception{
 
   @override
   String toString() {
-    return "Erro ao mapear de ${From} para ${To}: ${message}";
+    return "Erro ao mapear de $From para $To: $message";
   }
 }

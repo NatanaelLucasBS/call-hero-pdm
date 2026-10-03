@@ -1,0 +1,12 @@
+{
+  "name": "call-hero-backend",
+  "version": "1.0.0",
+  "description": "API REST mock com json-server dos heróis para o projeto Call Hero (UFRN - PDM)",
+  "scripts": {
+    "start": "json-server db.json --host 0.0.0.0 --port ${PORT:-3000}",
+    "dev": "json-server db.json --host 0.0.0.0 --port 3000"
+  },
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
+}
