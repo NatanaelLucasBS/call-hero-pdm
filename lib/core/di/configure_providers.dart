@@ -21,7 +21,8 @@ class ConfigureProviders {
     // - Celular físico via adb reverse ou Desktop: "http://localhost:3000"
     // - Emulador Android: "http://10.0.2.2:3000"
     // - API na Nuvem (Render): "https://seu-app.onrender.com"
-    const String baseUrl = "http://localhost:3000";
+    // API na Nuvem (Render):
+    const String baseUrl = "https://call-hero-pdm.onrender.com";
 
     final apiClient = ApiClient(baseUrl: baseUrl);
     final networkMapper = NetworkMapper();
