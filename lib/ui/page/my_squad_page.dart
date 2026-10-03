@@ -143,6 +143,17 @@ class _MySquadPageState extends State<MySquadPage> {
                                   textAlign: TextAlign.center,
                                   style: TextStyle(color: Colors.grey),
                                 ),
+                                const SizedBox(height: 20),
+                                ElevatedButton.icon(
+                                  icon: const Icon(Icons.group_add),
+                                  label: const Text('Recrutar 5 Especialistas (Teste)'),
+                                  onPressed: () async {
+                                    setState(() => _isLoading = true);
+                                    final repo = Provider.of<HeroRepository>(context, listen: false);
+                                    await repo.seedTestSquad();
+                                    _loadSquad();
+                                  },
+                                ),
                               ],
                             ),
                           ),

@@ -34,4 +34,7 @@ abstract class HeroRepository {
 
   /// Incrementa em +1 um atributo de um herói após vencer um combate (Slide 13).
   Future<void> evolveHeroStat({required int heroId, required String statName});
+
+  /// Recruta 5 heróis especialistas (um de cada atributo) para viabilizar testes de missões.
+  Future<void> seedTestSquad();
 }

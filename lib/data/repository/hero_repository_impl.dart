@@ -136,4 +136,21 @@ class HeroRepositoryImpl implements HeroRepository {
   }) async {
     await squadDao.incrementStat(heroId: heroId, statName: statName);
   }
+
+  /// Recruta 5 heróis especialistas (um de cada atributo) para viabilizar testes de missões:
+  /// - Batman (ID: 70) - Inteligência (100)
+  /// - Hulk (ID: 332) - Força (100)
+  /// - Flash (ID: 263) - Velocidade (100)
+  /// - Wolverine (ID: 717) - Durabilidade (100)
+  /// - Captain America (ID: 149) - Combate (100)
+  @override
+  Future<void> seedTestSquad() async {
+    final testHeroIds = [70, 332, 263, 717, 149];
+    for (final id in testHeroIds) {
+      final hero = await getHeroById(id);
+      if (hero != null) {
+        await recruitHero(hero);
+      }
+    }
+  }
 }

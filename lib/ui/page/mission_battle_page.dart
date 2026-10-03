@@ -377,6 +377,20 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
                       onPressed: () => Navigator.pop(context),
                     ),
                     ElevatedButton.icon(
+                      icon: const Icon(Icons.group_add),
+                      label: const Text('Recrutar 5 Especialistas (Teste)'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.amber.shade700,
+                        foregroundColor: Colors.white,
+                      ),
+                      onPressed: () async {
+                        setState(() => _isLoading = true);
+                        final repo = Provider.of<HeroRepository>(context, listen: false);
+                        await repo.seedTestSquad();
+                        _startMission();
+                      },
+                    ),
+                    OutlinedButton.icon(
                       icon: const Icon(Icons.assignment),
                       label: const Text('Contrato Diário'),
                       onPressed: () {
