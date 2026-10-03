@@ -36,6 +36,11 @@ class ApiClient {
         message: response.statusMessage,
       );
     } else if (response.statusCode != null) {
+      if (response.data is List) {
+        return (response.data as List)
+            .map((e) => HeroNetworkEntity.fromJson(e as Map<String, dynamic>))
+            .toList();
+      }
       final HttpPagedResult receivedData = HttpPagedResult.fromJson(
         response.data as Map<String, dynamic>,
       );
