@@ -25,8 +25,9 @@ class ApiClient {
     final response = await _dio.get(
       "/heroes",
       queryParameters: {
-        '_page': page,
-        '_per_page': limit,
+        '_page': ?page,
+        '_limit': ?limit,
+        '_per_page': ?limit,
       },
     );
 

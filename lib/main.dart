@@ -26,7 +26,7 @@ class AppRoot extends StatelessWidget {
       providers: data.providers,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Call of Heroes',
+        title: 'Call-Hero',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
             seedColor: const Color(0xFF1E3A8A), // Azul escuro tático
