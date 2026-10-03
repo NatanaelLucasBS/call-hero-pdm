@@ -4,7 +4,20 @@ import 'package:flutter/material.dart';
 import '../../domain/hero_model.dart';
 import '../page/hero_detail_page.dart';
 
-/// Card para exibição resumida de um herói no catálogo ou no esquadrão (Aulas 02 e 12).
+/// ============================================================================
+/// COMPONENTE VISUAL DO CARD DE AGENTE (HeroCard - Slides 5, 8 e Aula 02)
+/// ----------------------------------------------------------------------------
+/// - PAPEL: Widget reutilizável que renderiza as informações resumidas de um herói
+///   nas listas do Catálogo e do Meu Esquadrão.
+/// - O QUE PUXA: Recebe um [HeroModel] completo, callbacks opcionais de [onTap],
+///   widget de ação [trailing] (ex: botão de dispensar/lixeira) e subtítulo customizado.
+/// - QUEM USA: [HeroesCatalogPage] e [MySquadPage].
+/// - O QUE FAZ:
+///   1. Exibe a imagem miniatura com [CachedNetworkImage] (cache de imagens na memória/disco).
+///   2. Exibe o nome do herói e o badge colorido de alinhamento moral (GOOD / BAD).
+///   3. Destaca o papel tático / maior atributo (ex: STRENGTH: 100) com cor temática.
+///   4. Ao tocar, navega com animação nativa para a tela de detalhes ([HeroDetailPage]).
+/// ============================================================================
 class HeroCard extends StatelessWidget {
   final HeroModel hero;
   final VoidCallback? onTap;

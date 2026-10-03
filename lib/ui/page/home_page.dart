@@ -5,7 +5,19 @@ import 'heroes_catalog_page.dart';
 import 'mission_battle_page.dart';
 import 'my_squad_page.dart';
 
-/// Tela Inicial com os 4 pontos de acesso descritos no Slide 4 da aula.
+/// ============================================================================
+/// TELA PRINCIPAL (Home Hub - Slide 4 e Aula 02)
+/// ----------------------------------------------------------------------------
+/// - PAPEL: Painel central de navegação do aplicativo Call-Hero.
+/// - O QUE PUXA: Não depende diretamente de dados; navega via [Navigator] para
+///   as telas filhas com [MaterialPageRoute].
+/// - QUEM USA: [main.dart] como tela inicial (`home: const HomePage()`).
+/// - O QUE FAZ: Apresenta os 4 pontos de acesso táticos exigidos no Slide 4:
+///   1. 'Agentes': Abre o catálogo infinito ([HeroesCatalogPage]).
+///   2. 'Contrato Diário': Abre o sorteio diário de recrutamento ([DailyContractPage]).
+///   3. 'Meu Esquadrão': Lista os agentes recrutados e gerenciamento ([MySquadPage]).
+///   4. 'Missões': Inicia o combate tático em turnos ([MissionBattlePage]).
+/// ============================================================================
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 

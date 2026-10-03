@@ -9,7 +9,19 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/repository/hero_repository.dart';
 import '../../domain/hero_model.dart';
 
-/// Tela de Contrato Diário: sorteio de 1 agente por dia e recrutamento para o esquadrão (Slide 7).
+/// ============================================================================
+/// TELA DE CONTRATO DIÁRIO (Daily Contract - Slide 7)
+/// ----------------------------------------------------------------------------
+/// - PAPEL: Permitir o sorteio diário de 1 herói aleatório e o recrutamento para o esquadrão.
+/// - O QUE PUXA: Consome o [HeroRepository] para buscar o herói sorteado e persistir
+///   no SQLite do esquadrão, além do [SharedPreferences] para salvar a data do último sorteio.
+/// - QUEM USA: Acessada via botão 'Contrato Diário' na [HomePage].
+/// - O QUE FAZ:
+///   1. Garante a regra de 1 sorteio por dia persistida em [SharedPreferences].
+///   2. Renderiza o card exclusivo do Slide 7: apenas nome, imagem e os 6 powerstats.
+///   3. Permite recrutar o agente respeitando o teto de 15 membros e evitando duplicatas.
+///   4. Emite diálogos de feedback visual com [AwesomeDialog].
+/// ============================================================================
 class DailyContractPage extends StatefulWidget {
   const DailyContractPage({super.key});
 

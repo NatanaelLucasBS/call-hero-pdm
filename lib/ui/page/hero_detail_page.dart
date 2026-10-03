@@ -7,7 +7,20 @@ import 'package:provider/provider.dart';
 import '../../data/repository/hero_repository.dart';
 import '../../domain/hero_model.dart';
 
-/// Tela de detalhes completos do herói com visualização de atributos e biografia (Slides 6 e 9).
+/// ============================================================================
+/// TELA DE DETALHES DO AGENTE (Hero Details - Slides 6, 9 e Aula 12)
+/// ----------------------------------------------------------------------------
+/// - PAPEL: Exibir a ficha cadastral completa do herói (Atributos, Biografia,
+///   Aparência, Trabalho e Grupos).
+/// - O QUE PUXA: Recebe um [HeroModel] inicial e consome o [HeroRepository]
+///   para atualizar dados via `getHeroById(id)` e para dispensar o agente via `dismissHero(id)`.
+/// - QUEM USA: Navegada ao tocar em qualquer card no catálogo ([HeroesCatalogPage])
+///   ou na lista do esquadrão ([MySquadPage]).
+/// - O QUE FAZ:
+///   1. Renderiza os 6 atributos usando o pacote obrigatório [SegmentedBar] (`primer_progress_bar`).
+///   2. Atualiza os dados com a API/banco em segundo plano no `initState`.
+///   3. Permite dispensar o herói do esquadrão com diálogo de confirmação via [AwesomeDialog].
+/// ============================================================================
 class HeroDetailPage extends StatefulWidget {
   final HeroModel hero;
   final bool isSquadMember;

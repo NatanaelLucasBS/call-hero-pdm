@@ -4,7 +4,19 @@ import '../../../domain/exception/network_exception.dart';
 import '../entity/hero_network_entity.dart';
 import '../entity/http_paged_result.dart';
 
-/// Cliente HTTP da aplicação utilizando a biblioteca Dio (Aula 06).
+/// ============================================================================
+/// CLIENTE HTTP DA APLICAÇÃO (Dio Client - Aula 06)
+/// ----------------------------------------------------------------------------
+/// - PAPEL: Realizar a comunicação de rede remota com a API REST (json-server no Render).
+/// - O QUE PUXA: Recebe a [baseUrl] no construtor e dispara requisições HTTP GET.
+/// - QUEM USA: [HeroRepositoryImpl], que consome o ApiClient para buscar heróis
+///   quando o cache local SQLite não possui os dados solicitados.
+/// - O QUE FAZ:
+///   1. Configura a instância do [Dio] com logs de requisição/resposta ([LogInterceptor]).
+///   2. [getHeroes]: Busca heróis com paginação via query parameters.
+///   3. [getHeroById]: Busca os dados detalhados de um herói específico por ID.
+///   4. Lança [NetworkException] em caso de status code >= 400.
+/// ============================================================================
 class ApiClient {
   late final Dio _dio;
 

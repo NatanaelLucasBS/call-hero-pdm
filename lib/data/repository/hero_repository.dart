@@ -1,6 +1,15 @@
 import '../../domain/hero_model.dart';
 
-/// Interface do repositório de heróis e esquadrão segundo o padrão Repository (Aulas 08 e 12).
+/// ============================================================================
+/// CONTRATO DO REPOSITÓRIO (Repository Interface - Aulas 08 e 12)
+/// ----------------------------------------------------------------------------
+/// - PAPEL: Definir a abstração de acesso a dados (Catálogo e Esquadrão),
+///   desacoplando totalmente a UI das implementações concretas (Dio/SQLite).
+/// - O QUE PUXA: Opera exclusivamente com modelos de domínio ([HeroModel]) e tipos puros.
+/// - QUEM USA: Todas as telas da UI consom essa interface via `Provider.of<HeroRepository>(context)`.
+/// - O QUE FAZ: Estabelece os contratos de busca paginada, busca por ID, recrutamento,
+///   dispensa, contagem de vagas e evolução de atributos.
+/// ============================================================================
 abstract class HeroRepository {
   /// Retorna lista paginada de heróis com estratégia de cache offline-first.
   Future<List<HeroModel>> getHeroes({required int page, required int limit});

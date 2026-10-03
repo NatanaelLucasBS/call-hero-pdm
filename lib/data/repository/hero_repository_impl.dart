@@ -6,7 +6,23 @@ import '../network/client/api_client.dart';
 import '../network/network_mapper.dart';
 import 'hero_repository.dart';
 
-/// Implementação do HeroRepository orquestrando dados remotos (Dio) e locais (SQLite) (Aulas 08 e 12).
+/// ============================================================================
+/// IMPLEMENTAÇÃO DO REPOSITÓRIO (Repository Pattern - Aulas 08 e 12)
+/// ----------------------------------------------------------------------------
+/// - PAPEL: Atuar como ponto único de verdade (Single Source of Truth), orquestrando
+///   a política Offline-First entre a rede remota ([ApiClient]) e o banco local ([HeroDao]/[SquadDao]).
+/// - O QUE PUXA: Recebe por Inversão de Controle ([ConfigureProviders]) o [ApiClient],
+///   os mappers ([NetworkMapper], [DatabaseMapper]) e os DAOs ([HeroDao], [SquadDao]).
+/// - QUEM USA: As páginas da UI ([HeroesCatalogPage], [DailyContractPage], [MySquadPage],
+///   [MissionBattlePage], [HeroDetailPage]).
+/// - O QUE FAZ:
+///   1. [getHeroes]: Estratégia Cache-First: busca no SQLite local; se vazio, busca na API,
+///      converte via [NetworkMapper], persiste no SQLite via [HeroDao] e retorna à UI.
+///   2. [getHeroById]: Para membros do esquadrão, prioriza o SQLite (mantém atributos evoluídos);
+///      para o catálogo, busca da API ou fallback no SQLite se offline.
+///   3. [recruitHero]: Valida limite de 15 agentes, checa duplicatas e insere no SQLite.
+///   4. [evolveHeroStat]: Atualiza permanentemente no SQLite o stat aumentado (+1) pós-vitória.
+/// ============================================================================
 class HeroRepositoryImpl implements HeroRepository {
   final ApiClient apiClient;
   final NetworkMapper networkMapper;
@@ -14,7 +30,6 @@ class HeroRepositoryImpl implements HeroRepository {
   final SquadDao squadDao;
   final DatabaseMapper databaseMapper;
 
-  /// Injeção de dependências das fontes de dados e mappers (Slide 12 / Inversão de Controle).
   HeroRepositoryImpl({
     required this.heroDao,
     required this.squadDao,

@@ -9,7 +9,17 @@ import '../../data/network/network_mapper.dart';
 import '../../data/repository/hero_repository.dart';
 import '../../data/repository/hero_repository_impl.dart';
 
-/// Configuração do container de Injeção de Dependências utilizando Provider (Aula 02 e Aula 12).
+/// ============================================================================
+/// CONTAINER DE INJEÇÃO DE DEPENDÊNCIAS (IoC / DI - Aulas 02 e 12)
+/// ----------------------------------------------------------------------------
+/// - PAPEL: Montar a árvore de objetos e instâncias da aplicação.
+/// - O QUE PUXA: Instancia o [ApiClient], os mappers ([NetworkMapper], [DatabaseMapper]),
+///   os DAOs ([HeroDao], [SquadDao]) e o repositório ([HeroRepositoryImpl]).
+/// - QUEM USA: [main.dart] na inicialização, fornecendo a lista de Providers para
+///   o [MultiProvider]. Todas as telas consom o [HeroRepository] via context.
+/// - O QUE FAZ: Aplica o princípio da Inversão de Controle (IoC), garantindo que
+///   as telas dependam da abstração [HeroRepository] e não de implementações concretas.
+/// ============================================================================
 class ConfigureProviders {
   final List<SingleChildWidget> providers;
 
@@ -17,11 +27,7 @@ class ConfigureProviders {
 
   /// Constrói e resolve a árvore de dependências da aplicação.
   static Future<ConfigureProviders> createDependencyTree() async {
-    // NOTA DIDÁTICA (Apresentação / Aula 06):
-    // - Celular físico via adb reverse ou Desktop: "http://localhost:3000"
-    // - Emulador Android: "http://10.0.2.2:3000"
-    // - API na Nuvem (Render): "https://seu-app.onrender.com"
-    // API na Nuvem (Render):
+    // API na Nuvem hospedada no Render:
     const String baseUrl = "https://call-hero-pdm.onrender.com";
 
     final apiClient = ApiClient(baseUrl: baseUrl);

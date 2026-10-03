@@ -20,7 +20,22 @@ class MissionCrisisRound {
   });
 }
 
-/// Tela de Missões táticas e combate (Slides 10 a 13 da Aula 12).
+/// ============================================================================
+/// TELA DE MISSÕES TÁTICAS E COMBATE (Tactical Missions - Slides 10 a 13)
+/// ----------------------------------------------------------------------------
+/// - PAPEL: Controlar a lógica de combate em turnos e evolução do esquadrão.
+/// - O QUE PUXA: Consome o [HeroRepository] para obter os membros do esquadrão,
+///   sortear vilões da API e salvar a evolução de atributos (+1 no SQLite).
+/// - QUEM USA: Acessada via botão 'Missões' na [HomePage].
+/// - O QUE FAZ:
+///   1. Valida o pré-requisito de no mínimo 5 membros no esquadrão (Slide 10).
+///   2. Gera aleatoriamente de 3 a 5 rounds de crise com inimigo e atributo testado.
+///   3. Oculta os atributos do inimigo, exibindo apenas imagem, nome e o stat em teste.
+///   4. Apresenta o esquadrão em grade circular 3x5 de avatares com nomes (Slide 11).
+///   5. Aplica lockout de uso único por herói durante toda a missão (Slide 12).
+///   6. Exibe diálogo de vitória com a foto do herói e evolução permanente (+1)
+///      ou diálogo de derrota caso o jogador perca mais da metade dos rounds (Slide 13).
+/// ============================================================================
 class MissionBattlePage extends StatefulWidget {
   const MissionBattlePage({super.key});
 

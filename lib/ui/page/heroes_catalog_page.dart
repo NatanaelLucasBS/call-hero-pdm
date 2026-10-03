@@ -6,7 +6,19 @@ import '../../data/repository/hero_repository.dart';
 import '../../domain/hero_model.dart';
 import '../widgets/hero_card.dart';
 
-/// Tela de Catálogo de Agentes com scroll infinito e paginação automática (Slide 5 e Aula 12).
+/// ============================================================================
+/// TELA DO CATÁLOGO DE AGENTES (Infinite Scroll Catalog - Slide 5 e Aula 12)
+/// ----------------------------------------------------------------------------
+/// - PAPEL: Exibir a lista infinita de heróis disponíveis no universo do jogo.
+/// - O QUE PUXA: Consome o [HeroRepository] via `Provider.of<HeroRepository>(context)`
+///   chamando o método `getHeroes(page, limit)`.
+/// - QUEM USA: Acessada a partir do botão 'Agentes' na [HomePage].
+/// - O QUE FAZ:
+///   1. Usa o pacote [PagingController] para paginação sob demanda e rolagem infinita.
+///   2. Renderiza cada herói através do componente [HeroCard].
+///   3. Permite pull-to-refresh através do botão de atualização na AppBar.
+///   4. Faz o dispose correto do controlador de paginação para evitar memory leaks.
+/// ============================================================================
 class HeroesCatalogPage extends StatefulWidget {
   const HeroesCatalogPage({super.key});
 
