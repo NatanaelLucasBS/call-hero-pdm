@@ -112,7 +112,9 @@ class _DailyContractPageState extends State<DailyContractPage> {
       if (mounted) {
         setState(() => _isLoading = false);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Erro ao sortear agente. Tente novamente.')),
+          const SnackBar(
+            content: Text('Falha ao sortear agente. Verifique sua conexão e tente novamente.'),
+          ),
         );
       }
     }
@@ -129,7 +131,7 @@ class _DailyContractPageState extends State<DailyContractPage> {
         dialogType: DialogType.warning,
         animType: AnimType.bottomSlide,
         title: 'Esquadrão Cheio',
-        desc: 'Seu esquadrão já atingiu a capacidade máxima de 15 agentes (Slide 7). Dispense alguém antes de recrutar.',
+        desc: 'Seu esquadrão já atingiu a capacidade máxima de 15 agentes. Dispense um integrante em Meu Esquadrão para liberar uma nova vaga.',
         btnOkText: 'Entendido',
         btnOkOnPress: () {},
       ).show();
@@ -162,8 +164,8 @@ class _DailyContractPageState extends State<DailyContractPage> {
         context: context,
         dialogType: DialogType.error,
         animType: AnimType.bottomSlide,
-        title: 'Não Foi Possível Recrutar',
-        desc: 'Este agente já faz parte do esquadrão ou a capacidade máxima foi atingida.',
+        title: 'Recrutamento Não Realizado',
+        desc: 'Este agente já faz parte do seu esquadrão ou a capacidade máxima de 15 agentes foi atingida.',
         btnOkText: 'OK',
         btnOkOnPress: () {},
       ).show();

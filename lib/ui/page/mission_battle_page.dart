@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 
 import '../../data/repository/hero_repository.dart';
 import '../../domain/hero_model.dart';
+import 'daily_contract_page.dart';
 
 /// Modelo de uma rodada de crise na missão (Slide 10 e 11).
 class MissionCrisisRound {
@@ -80,60 +81,76 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
   Future<void> _startMission() async {
     setState(() => _isLoading = true);
     final repo = Provider.of<HeroRepository>(context, listen: false);
-    final squad = await repo.getSquadMembers();
 
-    // Trava de segurança: esquadrão precisa ter pelo menos 5 agentes (Slide 10)
-    if (squad.length < 5) {
+    try {
+      final squad = await repo.getSquadMembers();
+
+      // Trava de segurança: esquadrão precisa ter pelo menos 5 agentes (Slide 10)
+      if (squad.length < 5) {
+        if (mounted) {
+          setState(() {
+            _squadMembers = squad;
+            _isLoading = false;
+          });
+        }
+        return;
+      }
+
+      final squadIds = squad.map((h) => h.id).toSet();
+
+      // Sorteia de 3 a 5 rounds para o Desafio de Crise (Slide 10)
+      final int totalRounds = _random.nextInt(3) + 3;
+      final List<MissionCrisisRound> generatedRounds = [];
+
+      for (int i = 0; i < totalRounds; i++) {
+        // Regra do Slide 10: Se sortear herói do esquadrão, sorteia novamente
+        int enemyId;
+        HeroModel? enemy;
+        do {
+          enemyId = _random.nextInt(560) + 1;
+        } while (squadIds.contains(enemyId));
+
+        enemy = await repo.getHeroById(enemyId);
+        // Fallback de segurança se id não existir na API
+        enemy ??= await repo.getHeroById(1);
+
+        final testedStat = _challengeStats[_random.nextInt(_challengeStats.length)];
+
+        generatedRounds.add(
+          MissionCrisisRound(
+            roundNumber: i + 1,
+            enemy: enemy!,
+            testedStat: testedStat,
+          ),
+        );
+      }
+
       if (mounted) {
         setState(() {
           _squadMembers = squad;
+          _rounds = generatedRounds;
+          _currentRoundIndex = 0;
+          _usedHeroIds.clear();
+          _victories = 0;
+          _defeats = 0;
+          _draws = 0;
+          _winningHeroes.clear();
           _isLoading = false;
         });
       }
-      return;
-    }
-
-    final squadIds = squad.map((h) => h.id).toSet();
-
-    // Sorteia de 3 a 5 rounds para o Desafio de Crise (Slide 10)
-    final int totalRounds = _random.nextInt(3) + 3;
-    final List<MissionCrisisRound> generatedRounds = [];
-
-    for (int i = 0; i < totalRounds; i++) {
-      // Regra do Slide 10: Se sortear herói do esquadrão, sorteia novamente
-      int enemyId;
-      HeroModel? enemy;
-      do {
-        enemyId = _random.nextInt(560) + 1;
-      } while (squadIds.contains(enemyId));
-
-      enemy = await repo.getHeroById(enemyId);
-      // Fallback de segurança se id não existir na API
-      enemy ??= await repo.getHeroById(1);
-
-      final testedStat = _challengeStats[_random.nextInt(_challengeStats.length)];
-
-      generatedRounds.add(
-        MissionCrisisRound(
-          roundNumber: i + 1,
-          enemy: enemy!,
-          testedStat: testedStat,
-        ),
-      );
-    }
-
-    if (mounted) {
-      setState(() {
-        _squadMembers = squad;
-        _rounds = generatedRounds;
-        _currentRoundIndex = 0;
-        _usedHeroIds.clear();
-        _victories = 0;
-        _defeats = 0;
-        _draws = 0;
-        _winningHeroes.clear();
-        _isLoading = false;
-      });
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isLoading = false);
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.error,
+          animType: AnimType.bottomSlide,
+          title: 'Erro de Conexão',
+          desc: 'Não foi possível carregar os dados da missão. Verifique sua conexão com a internet e tente novamente.',
+          btnOkText: 'Voltar',
+          btnOkOnPress: () => Navigator.pop(context),
+        ).show();
+      }
     }
   }
 
@@ -325,7 +342,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
       );
     }
 
-    // Trava de Entrada: Mínimo 5 membros no esquadrão (Slide 10)
+    // Trava de Entrada: Mínimo 5 membros no esquadrão
     if (_squadMembers.length < 5) {
       return Scaffold(
         appBar: AppBar(title: const Text('Missão Tática')),
@@ -341,18 +358,35 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
                   'Esquadrão Incompleto',
                   style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
                 Text(
-                  'O esquadrão precisa ter pelo menos 5 agentes para iniciar uma Missão (Slide 10).\n\n'
-                  'Você possui apenas ${_squadMembers.length} agente(s). Recrute mais heróis no Contrato Diário.',
+                  'Você precisa de pelo menos 5 heróis no esquadrão para iniciar uma missão.\n\n'
+                  'Atualmente você possui ${_squadMembers.length} herói(s). Recrute novos integrantes no Contrato Diário para liberar as operações de combate.',
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.grey),
+                  style: const TextStyle(color: Colors.grey, height: 1.4),
                 ),
                 const SizedBox(height: 24),
-                ElevatedButton.icon(
-                  icon: const Icon(Icons.arrow_back),
-                  label: const Text('Voltar'),
-                  onPressed: () => Navigator.pop(context),
+                Wrap(
+                  spacing: 12,
+                  runSpacing: 12,
+                  alignment: WrapAlignment.center,
+                  children: [
+                    OutlinedButton.icon(
+                      icon: const Icon(Icons.arrow_back),
+                      label: const Text('Voltar'),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.assignment),
+                      label: const Text('Contrato Diário'),
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => const DailyContractPage()),
+                        );
+                      },
+                    ),
+                  ],
                 ),
               ],
             ),

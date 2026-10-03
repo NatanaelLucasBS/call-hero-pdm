@@ -73,6 +73,44 @@ class _HeroesCatalogPageState extends State<HeroesCatalogPage> {
               padding: EdgeInsets.all(16),
               child: Center(child: CircularProgressIndicator()),
             ),
+            firstPageErrorIndicatorBuilder: (context) => Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.wifi_off, size: 64, color: Colors.grey),
+                    const SizedBox(height: 16),
+                    Text(
+                      'Falha ao carregar catálogo',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      'Não foi possível estabelecer conexão com o servidor de agentes.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    const SizedBox(height: 16),
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.refresh),
+                      label: const Text('Tentar Novamente'),
+                      onPressed: () => _pagingController.refresh(),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            newPageErrorIndicatorBuilder: (context) => Padding(
+              padding: const EdgeInsets.all(16),
+              child: Center(
+                child: TextButton.icon(
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('Erro ao carregar mais heróis. Toque para tentar novamente.'),
+                  onPressed: fetchNextPage,
+                ),
+              ),
+            ),
             noItemsFoundIndicatorBuilder: (context) => const Center(
               child: Text('Nenhum herói encontrado.'),
             ),
