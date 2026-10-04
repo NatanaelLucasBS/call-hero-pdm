@@ -212,6 +212,26 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
     ).show();
   }
 
+  /// Formata o nome do atributo para exibição amigável.
+  String _formatStatName(String stat) {
+    switch (stat.toLowerCase()) {
+      case 'intelligence':
+        return 'Intelligence';
+      case 'strength':
+        return 'Strength';
+      case 'speed':
+        return 'Speed';
+      case 'durability':
+        return 'Durability';
+      case 'power':
+        return 'Power';
+      case 'combat':
+        return 'Combat';
+      default:
+        return stat;
+    }
+  }
+
   /// Formata a contagem do placar com concordância gramatical singular/plural.
   String _formatScore() {
     final vText = _victories == 1 ? '1 Vitória' : '$_victories Vitórias';
@@ -233,7 +253,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
       // Sorteia um powerstat aleatório para ganhar +1 (Slide 13)
       final randomStat = _challengeStats[_random.nextInt(_challengeStats.length)];
 
-      // Grava a evolução de +1 permanente no SQLite
+      // Grava a evolução de +1 no SQLite
       await repo.evolveHeroStat(heroId: evolvedHero.id, statName: randomStat);
 
       if (!mounted) return;
@@ -272,14 +292,19 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
             ),
             const SizedBox(height: 8),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: Colors.green.shade100,
+                color: Colors.green.shade50,
+                border: Border.all(color: Colors.green.shade300),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Text(
-                '+1 permanente em ${randomStat.toUpperCase()}!',
-                style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green.shade900),
+                'Bônus: +1 no atributo ${_formatStatName(randomStat)}!',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                  color: Colors.green.shade900,
+                ),
               ),
             ),
             const SizedBox(height: 10),
