@@ -174,12 +174,12 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
     if (heroValue > enemyValue) {
       _victories++;
       _winningHeroes.add(chosenHero);
-      roundTitle = 'Sucesso na Rodada!';
+      roundTitle = 'Seu herói venceu!';
       roundDesc = '${chosenHero.name} ($heroValue) superou ${round.enemy.name} ($enemyValue) em $stat.';
       dialogType = DialogType.success;
     } else if (heroValue < enemyValue) {
       _defeats++;
-      roundTitle = 'Falha na Rodada!';
+      roundTitle = 'Seu herói perdeu!';
       roundDesc = '${round.enemy.name} ($enemyValue) superou ${chosenHero.name} ($heroValue) em $stat.';
       dialogType = DialogType.error;
     } else {
