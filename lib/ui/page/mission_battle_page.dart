@@ -185,7 +185,8 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
     } else {
       _draws++;
       roundTitle = 'Empate Tático!';
-      roundDesc = 'Ambos empataram em $stat com valor $heroValue.';
+      roundDesc = 'Ambos empataram em $stat ($heroValue vs $enemyValue).\n'
+          'Esta rodada não pontua para nenhum dos lados (não adiciona rodadas extras ao desafio).';
       dialogType = DialogType.warning;
     }
 
@@ -211,10 +212,19 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
     ).show();
   }
 
+  /// Formata a contagem do placar com concordância gramatical singular/plural.
+  String _formatScore() {
+    final vText = _victories == 1 ? '1 Vitória' : '$_victories Vitórias';
+    final dText = _defeats == 1 ? '1 Derrota' : '$_defeats Derrotas';
+    final eText = _draws == 1 ? '1 Empate' : '$_draws Empates';
+    return 'Placar: $vText, $dText, $eText.';
+  }
+
   /// Finaliza a missão e dispara o feedback com evolução de +1 no SQLite (Slide 13).
   Future<void> _finishMission() async {
-    final totalRounds = _rounds.length;
-    final bool overallVictory = _victories > (totalRounds / 2);
+    // Regra do Slide 13: O jogador vence a missão quando supera a maioria das ameaças (vitórias > derrotas)
+    // Empates não pontuam para o vilão nem para o jogador.
+    final bool overallVictory = _victories > _defeats && _victories > 0;
     final repo = Provider.of<HeroRepository>(context, listen: false);
 
     if (overallVictory && _winningHeroes.isNotEmpty) {
@@ -274,7 +284,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
             ),
             const SizedBox(height: 10),
             Text(
-              'Placar: $_victories Vitórias, $_defeats Derrotas, $_draws Empates.',
+              _formatScore(),
               style: const TextStyle(color: Colors.grey, fontSize: 12),
             ),
           ],
@@ -320,7 +330,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
             ),
             const SizedBox(height: 8),
             Text(
-              'Placar: $_victories Vitórias, $_defeats Derrotas, $_draws Empates.',
+              _formatScore(),
               style: const TextStyle(color: Colors.grey, fontSize: 12),
             ),
           ],
@@ -429,7 +439,45 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
                 Text('Empates: $_draws', style: const TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
+
+            // Banner do Desafio de Crise com indicação clara do total sorteado (Slide 10)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              decoration: BoxDecoration(
+                color: Colors.indigo.shade50,
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.indigo.shade200),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Icon(Icons.shield, size: 18, color: Colors.indigo.shade700),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Desafio de Crise',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.indigo.shade900,
+                          fontSize: 13,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    '${_rounds.length} Rodadas Sorteadas',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Colors.indigo.shade700,
+                      fontSize: 12,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 12),
 
             // Card do Inimigo da Rodada (Slide 11)
             // REGRA: "O app exibe a imagem e o nome do inimigo (não exibe seus atributos) além do nome do atributo em disputa"
@@ -485,7 +533,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
 
             // Escalação: "Miniaturas apenas com nome e imagem circular em um grid 3x5" (Slide 11)
             Text(
-              'Escale 1 Agente do Esquadrão (Grid 3x5):',
+              'Escale 1 Agente do seu Esquadrão:',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 4),

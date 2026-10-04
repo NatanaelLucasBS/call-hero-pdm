@@ -108,9 +108,9 @@ void main() {
 
     test('Valida que cada um dos 5 heróis possui uma especialidade dominante diferente', () {
       expect(batman.highestStatName, 'Intelligence');
-      expect(hulk.powerstats.strength, 100);
+      expect(hulk.highestStatName, 'Strength');
       expect(flash.highestStatName, 'Speed');
-      expect(wolverine.powerstats.durability, 100);
+      expect(wolverine.highestStatName, 'Durability');
       expect(captainAmerica.highestStatName, 'Combat');
     });
 

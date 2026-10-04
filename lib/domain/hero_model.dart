@@ -123,6 +123,8 @@ class Powerstats {
   }
 
   /// Retorna o nome do maior atributo usando Programação Funcional (reduce) - Papel Tático (Slide 8).
+  /// Em caso de empate entre pontuações máximas (ex: Batman com 100 em Inteligência e Combate; Hulk com 100 em Força e Durabilidade),
+  /// o operador '>=' preserva o primeiro atributo dominante de sua essência canônica (Batman = Inteligência, Hulk = Força).
   String get highestStatName {
     final stats = {
       'Intelligence': intelligence,
@@ -134,7 +136,7 @@ class Powerstats {
     };
 
     return stats.entries
-        .reduce((curr, next) => curr.value > next.value ? curr : next)
+        .reduce((curr, next) => curr.value >= next.value ? curr : next)
         .key;
   }
 }

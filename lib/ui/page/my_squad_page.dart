@@ -162,9 +162,10 @@ class _MySquadPageState extends State<MySquadPage> {
                           itemCount: _squadMembers.length,
                           itemBuilder: (context, index) {
                             final hero = _squadMembers[index];
+                            // Exibe o papel tático (maior atributo) conforme o Slide 8
                             return HeroCard(
                               hero: hero,
-                              subtitleOverride: 'Função: Especialista em ${hero.highestStatName.toUpperCase()}',
+                              subtitleOverride: 'Papel Tático: ${hero.highestStatName}',
                               trailing: IconButton(
                                 icon: const Icon(Icons.delete_outline, color: Colors.red),
                                 tooltip: 'Dispensar',

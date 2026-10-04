@@ -60,9 +60,10 @@ class _HeroDetailPageState extends State<HeroDetailPage> {
   }
 
   /// Constrói uma barra de atributo proporcional usando primer_progress_bar (Slide 6).
+  /// Exibe o valor real ($value / 100), mesmo que o herói tenha evoluído além de 100 em combate (Slide 13).
   Widget _buildStatBar(BuildContext context, String label, int value, Color color) {
-    final int safeValue = value.clamp(0, 100);
-    final int remaining = 100 - safeValue;
+    final int barFill = value.clamp(0, 100);
+    final int remaining = (100 - barFill).clamp(0, 100);
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
@@ -77,7 +78,7 @@ class _HeroDetailPageState extends State<HeroDetailPage> {
                 style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 13),
               ),
               Text(
-                '$safeValue / 100',
+                '$value / 100',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 13, color: color),
               ),
             ],
@@ -85,7 +86,7 @@ class _HeroDetailPageState extends State<HeroDetailPage> {
           const SizedBox(height: 4),
           SegmentedBar(
             segments: [
-              Segment(value: safeValue, color: color),
+              Segment(value: barFill, color: color),
               Segment(value: remaining, color: Colors.grey.shade200),
             ],
             maxTotalValue: 100,

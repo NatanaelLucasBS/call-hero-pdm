@@ -316,26 +316,27 @@ Mecanismo de contrato diário:
 #### Arquivo: `lib/ui/page/my_squad_page.dart` (Slides 8 e 9)
 Gestão dos recrutas do jogador:
 - Indicador visual superior de capacidade (ex: `7 / 15 Agentes`).
-- Lista os heróis salvos no SQLite com seus papéis táticos (`Especialista em ...`).
+- Lista os heróis salvos no SQLite com seus papéis táticos calculados funcionalmente (ex: `Papel Tático: Inteligência`).
 - Botão de lixeira individual e toque no card para detalhes com dispensa.
 - **Confirmação com `AwesomeDialog`:** Modal de advertência com opções "Cancelar" e "Dispensar", removendo fisicamente do banco após confirmação.
 
 #### Arquivo: `lib/ui/page/mission_battle_page.dart` (Slides 10 a 13)
 Sala de crise e sistema de combate tático:
 1. **Portão de Segurança (Slide 10):** Se o jogador tiver menos de 5 heróis, a tela exibe um aviso bloqueando a missão até que 5 agentes sejam recrutados.
-2. **Sorteio da Crise:** Sorteia de **3 a 5 rodadas**.
+2. **Sorteio da Crise (Slide 10):** Sorteia aleatoriamente de **3 a 5 rodadas** exibidas claramente no banner da tela.
 3. **Mecânica da Rodada (Slide 11):**
-   - Apresenta um adversário surpresa e o **atributo desafiado** sorteado (ex: "DESAFIO: COMBATE = 85").
-   - **Grade 3x5 de Seleção de Agentes:** Exibe os heróis do esquadrão disponíveis.
-   - **Regra de Uso Único:** Cada agente só pode ser utilizado em uma única rodada da missão. Heróis já utilizados ficam opacos e bloqueados para clique.
+   - Apresenta um adversário surpresa (sorteado fora do esquadrão) e o **atributo desafiado** sorteado (ex: "ATRIBUTO EM DISPUTA: SPEED"), mantendo os números do inimigo ocultos.
+   - **Grade Circular de Seleção:** Exibe os heróis do esquadrão disponíveis com fotos circulares e nomes.
+   - **Regra de Uso Único (Slide 12):** Cada agente só pode ser utilizado em uma única rodada por missão. Heróis já utilizados ficam opacos e bloqueados para clique.
 4. **Resolução do Combate e Evolução Permanente (Slides 12 e 13):**
-   - Compara o atributo do agente escolhido com o do vilão (`agentValue >= villainValue`).
-   - Se o agente vencer:
-     - Ganha o ponto da rodada.
-     - Executa `repo.evolveHeroStat(heroId: agent.id, statName: testedStat)`, somando **+1 definitivo no atributo no SQLite**!
-     - Exibe `AwesomeDialog` de vitória com a evolução do herói.
-   - Se o agente perder: exibe modal de derrota e computa o ponto do vilão.
-5. **Encerramento da Missão:** Modal com o placar final e opção para iniciar uma nova missão tática.
+   - Compara o atributo do agente escolhido com o do vilão (`heroValue` vs `enemyValue`).
+   - Se o herói for maior: Sucesso na rodada (`_victories++`) e o herói entra para a lista de vencedores.
+   - Se o herói for menor: Falha na rodada (`_defeats++`).
+   - Se valores forem iguais: Empate tático (`_draws++`). Não adiciona rodadas extras e não pontua para nenhum lado.
+5. **Encerramento da Missão (Slide 13):**
+   - Avalia o resultado global (`_victories > _defeats`):
+     - **Missão Cumprida (DialogType.success):** Se venceu a maioria das rodadas, sorteia um dos heróis que participou da vitória e concede **+1 permanente em um powerstat aleatório no SQLite**, exibindo a foto do herói.
+     - **Operação Fracassada (DialogType.error):** Se sofreu a maioria de derrotas, exibe imagem de derrota e placar final.
 
 ---
 
