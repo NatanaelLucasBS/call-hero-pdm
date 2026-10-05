@@ -2,11 +2,28 @@
 ## Professor: Taniro C. Rodrigues
 ## Disciplina: Programação para Dispositivos Móveis
 
-Este documento foi elaborado para servir como **roteiro de estudos e fundamentação teórica para a entrevista técnica individual**. Ele detalha cada classe, método, decisão arquitetural e regra de negócio implementada, explicando não apenas o **o quê**, mas principalmente o **porquê** de cada linha de código sob a ótica da metodologia ensinada pelo professor Taniro.
+Este documento foi elaborado para servir como roteiro de estudos e fundamentação teórica para a entrevista técnica individual. Ele detalha cada classe, método, decisão arquitetural e regra de negócio implementada, explicando não apenas o que o código faz, mas principalmente o embasamento teórico segundo as aulas e os slides do professor Taniro.
 
 ---
 
-## 1. Visão Sistêmica da Arquitetura do Professor Taniro
+## 1. Mapeamento Aula a Aula: O que o Professor Taniro Ensinou vs Implementação
+
+Todos os módulos, padrões de projeto e pacotes utilizados no Call-Hero foram extraídos diretamente das aulas expositivas e dos slides do professor Taniro C. Rodrigues na UFRN. Não há bibliotecas desconhecidas ou arquiteturas infladas copiadas da internet.
+
+| Aula do Professor Taniro | Conteúdo Teórico Ensinado | Onde está Aplicado no Projeto |
+| :--- | :--- | :--- |
+| **Aula 02 - Introdução ao Dart** | Orientação a Objetos, `final`, imutabilidade, métodos de extensão, coleções funcionais (`map`, `where`, `reduce`). | `lib/domain/hero_model.dart`: entidades imutáveis com `copyWith` e cálculo funcional do maior atributo com `reduce`. |
+| **Aula 03 e 05 - Widgets Básicos e Layout** | `StatelessWidget`, `StatefulWidget`, ciclo de vida (`initState`, `dispose`), `Column`, `Row`, `Card`, `GridView`. | `lib/ui/page/`: estrutura hierárquica das telas e widgets reaproveitáveis sem sobrecarga. |
+| **Aula 04 - Future e Navigation** | Programação assíncrona com `Future`/`async`/`await` e navegação clássica imperativa com `Navigator.push`. | Navegação direta entre as telas usando `Navigator.push(context, MaterialPageRoute(...))`. |
+| **Aula 06 - Integração com APIs** | Cliente HTTP `Dio`, interceptores de log e erro, rotas com paginação e DTOs com `fromJson`. | `lib/data/network/client/api_client.dart` e `lib/data/network/entity/hero_network_entity.dart`. |
+| **Aula 08 - Banco de Dados SQLite** | Pacote `sqflite`, classe auxiliar `BaseDao`, `openDatabase`, transações atômicas com `db.batch()` e operações CRUD. | `lib/data/database/dao/`: `base_dao.dart`, `hero_dao.dart` e `squad_dao.dart`. |
+| **Aula 11 - Bibliotecas** | Integração de pacotes Flutter: persistência de preferências com `shared_preferences` e cache de imagem com `cached_network_image`. | `lib/ui/page/daily_contract_page.dart` e `lib/ui/widgets/hero_card.dart`. |
+| **Aula 12 - Trabalho 1** | Especificação completa dos 14 slides do projeto: catálogo, contrato diário, esquadrão de até 15 membros e missões táticas. | Todo o fluxo de regras de negócio das 5 telas do sistema. |
+| **Aula 13 - Padrão Repository** | Padrão Repository com interface abstrata, classe concreta orquestradora, mappers desacoplados e injeção com `Provider`. | `lib/data/repository/hero_repository.dart`, `hero_repository_impl.dart`, `network_mapper.dart` e `database_mapper.dart`. |
+
+---
+
+## 2. Visão Sistêmica da Arquitetura do Professor Taniro
 
 O projeto segue uma arquitetura em camadas baseada em **Separação de Responsabilidades (SoC)**, **Repository Pattern** e **Injeção de Dependências com Provider**.
 
@@ -328,35 +345,47 @@ Sala de crise e sistema de combate tático:
    - Apresenta um adversário surpresa (sorteado fora do esquadrão) e o **atributo desafiado** sorteado (ex: "ATRIBUTO EM DISPUTA: SPEED"), mantendo os números do inimigo ocultos.
    - **Grade Circular de Seleção:** Exibe os heróis do esquadrão disponíveis com fotos circulares e nomes.
    - **Regra de Uso Único (Slide 12):** Cada agente só pode ser utilizado em uma única rodada por missão. Heróis já utilizados ficam opacos e bloqueados para clique.
-4. **Resolução do Combate e Evolução Permanente (Slides 12 e 13):**
+4. **Resolução do Combate e Feedback da Rodada (Slides 11 e 12):**
    - Compara o atributo do agente escolhido com o do vilão (`heroValue` vs `enemyValue`).
-   - Se o herói for maior: Sucesso na rodada (`_victories++`) e o herói entra para a lista de vencedores.
-   - Se o herói for menor: Falha na rodada (`_defeats++`).
-   - Se valores forem iguais: Empate tático (`_draws++`). Não adiciona rodadas extras e não pontua para nenhum lado.
+   - Se o herói for maior: Vitória na rodada (`_victories++`), exibindo o diálogo "Seu herói venceu!" com tipo `DialogType.success` e adicionando o herói à lista de vencedores.
+   - Se o herói for menor: Derrota na rodada (`_defeats++`), exibindo o diálogo "Seu herói perdeu!" com tipo `DialogType.error`.
+   - Se valores forem iguais: Empate tático (`_draws++`). Não adiciona rodadas extras e não pontua para nenhum lado, mantendo a duração do desafio justa.
 5. **Encerramento da Missão (Slide 13):**
-   - Avalia o resultado global (`_victories > _defeats`):
-     - **Missão Cumprida (DialogType.success):** Se venceu a maioria das rodadas, sorteia um dos heróis que participou da vitória e concede **+1 permanente em um powerstat aleatório no SQLite**, exibindo a foto do herói.
-     - **Operação Fracassada (DialogType.error):** Se sofreu a maioria de derrotas, exibe imagem de derrota e placar final.
+   - Avalia o resultado global (`_victories > _defeats` e `_victories > 0`):
+     - **Missão Cumprida (DialogType.success):** Se venceu a maioria das rodadas, sorteia um dos heróis que participou da vitória e concede o bônus através de um comando SQL `UPDATE squad SET {stat} = {stat} + 1 WHERE id = ?`. O diálogo exibe a foto do herói e o badge estilizado: "Bônus: +1 no atributo {Stat}!".
+     - **Operação Fracassada (DialogType.error):** Se sofreu a maioria de derrotas, exibe imagem de derrota, placar detalhado e opção de tentar novamente.
 
 ---
 
-## 3. Checklist de Implementação do Trabalho 1
+## 4. Bateria de Testes Automatizados (`test/mission_battle_test.dart`)
+
+Para assegurar a robustez do software perante a banca avaliadora, foi desenvolvida uma suíte de testes unitários contendo 6 cenários cobrindo as regras centrais de negócio do Slide 10 ao Slide 13:
+1. **Validação do Pré-requisito:** Testa a trava que impede missões com menos de 5 agentes no esquadrão.
+2. **Cobertura Canônica de Atributos:** Valida que os 5 heróis especialistas (Batman, Hulk, Flash, Wolverine e Capitão América) cobrem todos os atributos dominantes.
+3. **Simulação de Vitória em Inteligência e Força:** Valida a comparação de atributos e o incremento no placar de vitórias.
+4. **Simulação com Reset de Lockout:** Garante que heróis bloqueados em uma missão são liberados para a próxima campanha.
+5. **Simulação de Crise com 5 Rounds:** Testa a campanha máxima sem permitir reutilização do mesmo agente na mesma missão.
+6. **Smoke Test de Componentes:** Valida a árvore de widgets sem exceções de inicialização.
+
+---
+
+## 5. Checklist de Verificação dos Requisitos Oficiais
 
 - [x] **Domínio Puro:** `lib/domain/hero_model.dart` (CopyWith, Imutabilidade, Funcional `reduce`).
-- [x] **Rede (DTOs):** `hero_network_entity.dart`, `http_paged_result.dart` (Defesa de tipos).
+- [x] **Rede (DTOs):** `hero_network_entity.dart`, `http_paged_result.dart` (Defesa de tipos contra nulos).
 - [x] **Rede (Client HTTP):** `lib/data/network/client/api_client.dart` (`Dio`, log interceptors, tratamento de status >= 400).
 - [x] **Rede (Mapper):** `lib/data/network/network_mapper.dart` (`MapperException`).
-- [x] **Persistência Local (Entidade & Contrato):** `lib/data/database/entity/hero_database_entity.dart` (JSON serialização para atributos multivalorados).
-- [x] **Persistência Local (DAOs & BaseDao):** `base_dao.dart` (Batch atômico), `hero_dao.dart` (Transações), `squad_dao.dart` (Contagem, dispensa e incremento de stat).
+- [x] **Persistência Local (Entidade & Contrato):** `lib/data/database/entity/hero_database_entity.dart` (Serialização plana para SQLite).
+- [x] **Persistência Local (DAOs & BaseDao):** `base_dao.dart` (Batch atômico), `hero_dao.dart` (Transações em lote), `squad_dao.dart` (Contagem, dispensa e incremento de stat).
 - [x] **Persistência Local (Mapper):** `database_mapper.dart` (Bidirecional com `MapperException`).
 - [x] **Repositório (Offline-First):** `hero_repository.dart` e `hero_repository_impl.dart` (Cache de heróis, controle de 15 agentes e evolução).
 - [x] **Injeção de Dependências:** `configure_providers.dart` (Provider com suporte multi-plataforma).
-- [x] **Camada Visual - HeroCard:** `hero_card.dart` (`CachedNetworkImage` e especialidade tática).
+- [x] **Camada Visual - HeroCard:** `hero_card.dart` (`CachedNetworkImage` e especialidade tática funcional).
 - [x] **Camada Visual - Home:** `home_page.dart` (4 botões táticos de navegação - Slide 4).
 - [x] **Camada Visual - Catálogo:** `heroes_catalog_page.dart` (`infinite_scroll_pagination` - Slide 5).
-- [x] **Camada Visual - Detalhes:** `hero_detail_page.dart` (Barras proporcionais e biografia - Slide 6).
+- [x] **Camada Visual - Detalhes:** `hero_detail_page.dart` (`primer_progress_bar` com `SegmentedBar` e biografia - Slide 6).
 - [x] **Camada Visual - Contrato Diário:** `daily_contract_page.dart` (`SharedPreferences`, trava de 15 membros - Slide 7).
 - [x] **Camada Visual - Meu Esquadrão:** `my_squad_page.dart` (Listagem, capacidade, `AwesomeDialog` - Slides 8 e 9).
 - [x] **Camada Visual - Missões:** `mission_battle_page.dart` (Trava de 5 membros, 3 a 5 rodadas, grade 3x5, 1 uso por missão, combate de atributos, `AwesomeDialog`, evolução permanente +1 no SQLite - Slides 10 a 13).
-- [x] **Estabilidade e Qualidade:** `flutter analyze` executando com **Zero erros e Zero warnings**.
+- [x] **Estabilidade e Qualidade:** `flutter analyze` com 0 erros e 0 warnings, e `flutter test` com 6 testes aprovados.
 
