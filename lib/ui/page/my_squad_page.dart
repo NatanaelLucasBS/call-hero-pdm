@@ -69,8 +69,10 @@ class _MySquadPageState extends State<MySquadPage> {
     ).show();
   }
 
+  /// Desenha a tela do esquadrão: barra de ocupação de vagas (0/15) no topo e lista dos membros com papel tático e botão de dispensa.
   @override
   Widget build(BuildContext context) {
+
     final count = _squadMembers.length;
 
     return Scaffold(

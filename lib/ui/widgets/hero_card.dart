@@ -32,7 +32,7 @@ class HeroCard extends StatelessWidget {
     this.subtitleOverride,
   });
 
-  /// Retorna uma cor de destaque baseada no alinhamento moral do herói (Slide 6).
+  /// Define a cor temática para o badge de alinhamento moral (Bom = Verde, Mau = Vermelho, Neutro = Âmbar).
   Color _getAlignmentColor(String alignment) {
     switch (alignment.toLowerCase()) {
       case 'good':
@@ -44,8 +44,10 @@ class HeroCard extends StatelessWidget {
     }
   }
 
+  /// Desenha o card do agente: miniatura em cache à esquerda, nome, badge moral e atributo dominante ao centro, e ação à direita.
   @override
   Widget build(BuildContext context) {
+
     final highestStat = hero.highestStatName;
     final highestValue = hero.powerstats.getStatByName(highestStat);
 

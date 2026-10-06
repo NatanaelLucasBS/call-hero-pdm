@@ -46,8 +46,10 @@ class _HeroesCatalogPageState extends State<HeroesCatalogPage> {
     super.dispose();
   }
 
+  /// Desenha a tela do catálogo infinito: Scaffold com AppBar, botão de atualização e PagedListView com HeroCards.
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Catálogo de Agentes'),

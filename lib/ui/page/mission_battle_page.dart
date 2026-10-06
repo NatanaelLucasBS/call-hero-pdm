@@ -368,8 +368,10 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
     }
   }
 
+  /// Desenha a interface da missão: estado de carregamento, trava de esquadrão insuficiente (< 5 heróis) ou arena de combate ativa com placar, vilão e grade 3x5 de escalação.
   @override
   Widget build(BuildContext context) {
+
     if (_isLoading) {
       return Scaffold(
         appBar: AppBar(title: const Text('Missão Tática')),

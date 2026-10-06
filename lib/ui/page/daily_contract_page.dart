@@ -172,7 +172,7 @@ class _DailyContractPageState extends State<DailyContractPage> {
     }
   }
 
-  /// Card conforme Slide 7: "Deve conter apenas nome, imagem e power stats."
+  /// Desenha o card exclusivo do Slide 7: imagem centralizada, nome do agente e container com os 6 powerstats em barras lineares.
   Widget _buildDailyContractCard(HeroModel hero) {
     return Card(
       elevation: 4,
@@ -242,6 +242,7 @@ class _DailyContractPageState extends State<DailyContractPage> {
     );
   }
 
+  /// Desenha uma linha individual de atributo com rótulo, barra LinearProgressIndicator colorida e pontuação numérica.
   Widget _buildStatRow(String label, int value, Color color) {
     return Row(
       children: [
@@ -276,6 +277,7 @@ class _DailyContractPageState extends State<DailyContractPage> {
     );
   }
 
+  /// Desenha a tela de convocação diária: Scaffold com contador de vagas (0/15), card do sorteado e botão de recrutamento.
   @override
   Widget build(BuildContext context) {
     final bool isSquadFull = _squadCount >= 15;
@@ -283,6 +285,7 @@ class _DailyContractPageState extends State<DailyContractPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Contrato Diário'),
+
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),

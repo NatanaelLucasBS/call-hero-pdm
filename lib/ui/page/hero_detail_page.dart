@@ -59,8 +59,7 @@ class _HeroDetailPageState extends State<HeroDetailPage> {
     }
   }
 
-  /// Constrói uma barra de atributo proporcional usando primer_progress_bar (Slide 6).
-  /// Exibe o valor real ($value / 100), mesmo que o herói tenha evoluído além de 100 em combate (Slide 13).
+  /// Desenha uma barra horizontal segmentada (SegmentedBar do primer_progress_bar) proporcional ao atributo (0 a 100).
   Widget _buildStatBar(BuildContext context, String label, int value, Color color) {
     final int barFill = value.clamp(0, 100);
     final int remaining = (100 - barFill).clamp(0, 100);
@@ -96,7 +95,7 @@ class _HeroDetailPageState extends State<HeroDetailPage> {
     );
   }
 
-  /// Constrói um item de texto com rótulo e valor formatado.
+  /// Desenha uma linha de especificação textual contendo rótulo em negrito e valor descritivo alinhado.
   Widget _buildInfoRow(String label, String value) {
     if (value.isEmpty || value == '-' || value == 'null') return const SizedBox.shrink();
     return Padding(
@@ -143,11 +142,13 @@ class _HeroDetailPageState extends State<HeroDetailPage> {
     ).show();
   }
 
+  /// Desenha a ficha técnica completa: imagem grande no topo, barras dos 6 atributos, biografia, características físicas e afiliações.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(_hero.name),
+
         actions: [
           if (widget.isSquadMember)
             IconButton(

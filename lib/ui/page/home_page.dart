@@ -21,7 +21,7 @@ import 'my_squad_page.dart';
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  /// Widget auxiliar para criar os 4 botões de navegação
+  /// Desenha um Card estilizado com ListTile contendo ícone tático, título, subtítulo e evento de toque.
   Widget _buildMenuOption({
     required BuildContext context,
     required String title,
@@ -41,8 +41,10 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  /// Desenha o Hub principal da aplicação: Scaffold com AppBar e lista vertical dos 4 pontos de acesso táticos.
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Call-Hero'),
