@@ -2,5 +2,5 @@
 
 Projeto prático desenvolvido para a disciplina de Desenvolvimento para Dispositivos Móveis da UFRN.
 
-Consulte a especificação arquitetural completa e o roteiro de implementação no arquivo:
-- [DOCUMENTO_TECNICO_PROJETO.md](DOCUMENTO_TECNICO_PROJETO.md)
+Consulte a documentacao completa e manual de engenharia do projeto no arquivo oficial:
+- [MANUAL_DEFINITIVO_PROJETO_E_CODIGO.md](MANUAL_DEFINITIVO_PROJETO_E_CODIGO.md)
