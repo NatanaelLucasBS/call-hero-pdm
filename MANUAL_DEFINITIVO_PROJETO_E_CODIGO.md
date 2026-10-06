@@ -11,32 +11,61 @@
    - 1.1 O Pipeline Completo de Dados (Rede ao Banco e UI)
    - 1.2 Politica Offline-First e Isolamento de Tabelas
    - 1.3 Inversao de Controle (IoC) e Arvore de Dependencias
-2. [Os 5 Herois de Teste Semeados (seedTestSquad)](#2-os-5-herois-de-teste-semeados-seedtestsquad)
-   - 2.1 Justificativa Tecnica e Regra de Negocio do Slide 10
-   - 2.2 Ficha Tecnica dos 5 Especialistas (Atributos Dominantes)
-   - 2.3 Como a Semeadura Funciona no Codigo-Fonte
-3. [Analise Meticulosa do Slide 12 e Todos os Slides do Professor](#3-analise-meticulosa-do-slide-12-e-todos-os-slides-do-professor)
-   - 3.1 Slide 12: Execucao dos Rounds, Indicadores, Trava de Uso Unico e Avanco
-   - 3.2 Slide 03: Servidor Mock json-server e Superhero API
-   - 3.3 Slide 04: Hub de Navegacao (HomePage)
-   - 3.4 Slide 05: Catalogo Infinito e Paginacao sob Demanda
-   - 3.5 Slide 06: Ficha Tecnica e Barras Proporcionais Primer
-   - 3.6 Slide 07: Contrato Diario com SharedPreferences e Trava de 24 Horas
-   - 3.7 Slide 08: Gestao do Esquadrao, Teto de 15 Agentes e Papel Tatico
-   - 3.8 Slide 09: Dispensa com AwesomeDialog e Limpeza no SQLite
-   - 3.9 Slide 10: Desafio de Crise, Minimo 5 Agentes e Sorteio Anti-Clone
-   - 3.10 Slide 11: Arena de Combate, Grade 3x5 e Atributos Ocultos
-   - 3.11 Slide 13: Criterio de Vitoria, Dialogos e Evolucao Permanente (+1)
-   - 3.12 Slide 14: Resumo dos Criterios e Conformidade Arquitetural
-4. [Dicionario Tecnico Arquivo por Arquivo, Funcao por Funcao](#4-dicionario-tecnico-arquivo-por-arquivo-funcao-por-funcao)
-   - 4.1 Camada de Inicializacao e DI (main.dart, configure_providers.dart)
-   - 4.2 Camada de Dominio (hero_model.dart, exceptions)
-   - 4.3 Camada de Rede (api_client.dart, entities, network_mapper.dart)
-   - 4.4 Camada de Banco de Dados SQLite (base_dao.dart, hero_dao.dart, squad_dao.dart, database_mapper.dart, entities)
-   - 4.5 Camada de Repositorio (hero_repository.dart, hero_repository_impl.dart)
-   - 4.6 Componentes Visuais (hero_card.dart)
-   - 4.7 Telas da Interface (home_page.dart, heroes_catalog_page.dart, hero_detail_page.dart, daily_contract_page.dart, my_squad_page.dart, mission_battle_page.dart)
-5. [Banco de Perguntas de Alto Nivel da Banca e Respostas Senior](#5-banco-de-perguntas-de-alto-nivel-da-banca-e-respostas-senior)
+2. [Rastreamento Tecnico Completo Clique a Clique de Todo o Aplicativo](#2-rastreamento-tecnico-completo-clique-a-clique-de-todo-o-aplicativo)
+   - 2.0 O Ponto de Partida: Inicializacao do App (main.dart)
+   - 2.1 Fluxo: Clique em "Agentes" (Catalogo Infinito de Herois)
+   - 2.2 Fluxo: Clique em um Card de Heroi (Detalhes do Agente)
+   - 2.3 Fluxo: Clique em "Contrato Diario" (Sorteio e Recrutamento)
+   - 2.4 Fluxo: Clique em "Meu Esquadrao" (Gestao e Dispensa)
+   - 2.5 Fluxo: Clique em "Missoes" (Batalha Tatica e Evolucao de Nivel)
+3. [Os 5 Herois de Teste Semeados (seedTestSquad)](#3-os-5-herois-de-teste-semeados-seedtestsquad)
+   - 3.1 Justificativa Tecnica e Regra de Negocio do Slide 10
+   - 3.2 Ficha Tecnica dos 5 Especialistas (Atributos Dominantes)
+   - 3.3 Como a Semeadura Funciona no Codigo-Fonte
+4. [Analise Meticulosa do Slide 12 e Todos os Slides do Professor](#4-analise-meticulosa-do-slide-12-e-todos-os-slides-do-professor)
+   - 4.1 Slide 12: Execucao dos Rounds, Indicadores, Trava de Uso Unico e Avanco
+   - 4.2 Slide 03: Servidor Mock json-server e Superhero API
+   - 4.3 Slide 04: Hub de Navegacao (HomePage)
+   - 4.4 Slide 05: Catalogo Infinito e Paginacao sob Demanda
+   - 4.5 Slide 06: Ficha Tecnica e Barras Proporcionais Primer
+   - 4.6 Slide 07: Contrato Diario com SharedPreferences e Trava de 24 Horas
+   - 4.7 Slide 08: Gestao do Esquadrao, Teto de 15 Agentes e Papel Tatico
+   - 4.8 Slide 09: Dispensa com AwesomeDialog e Limpeza no SQLite
+   - 4.9 Slide 10: Desafio de Crise, Minimo 5 Agentes e Sorteio Anti-Clone
+   - 4.10 Slide 11: Arena de Combate, Grade 3x5 e Atributos Ocultos
+   - 4.11 Slide 13: Criterio de Vitoria, Dialogos e Evolucao Permanente (+1)
+   - 4.12 Slide 14: Resumo dos Criterios e Conformidade Arquitetural
+5. [Dicionario Tecnico Arquivo por Arquivo, Funcao por Funcao](#5-dicionario-tecnico-arquivo-por-arquivo-funcao-por-funcao)
+   - 5.1 Camada de Inicializacao e DI (main.dart, configure_providers.dart)
+   - 5.2 Camada de Dominio (hero_model.dart, exceptions)
+   - 5.3 Camada de Rede (api_client.dart, entities, network_mapper.dart)
+   - 5.4 Camada de Banco de Dados SQLite (base_dao.dart, hero_dao.dart, squad_dao.dart, database_mapper.dart, entities)
+   - 5.5 Camada de Repositorio (hero_repository.dart, hero_repository_impl.dart)
+   - 5.6 Componentes Visuais (hero_card.dart)
+   - 5.7 Telas da Interface (home_page.dart, heroes_catalog_page.dart, hero_detail_page.dart, daily_contract_page.dart, my_squad_page.dart, mission_battle_page.dart)
+6. [Banco de Perguntas de Alto Nivel da Banca e Respostas Senior](#6-banco-de-perguntas-de-alto-nivel-da-banca-e-respostas-senior)
+7. [Roteiro de Demonstracao Pratica de 5 Minutos para o Professor](#7-roteiro-de-demonstracao-pratica-de-5-minutos-para-o-professor)
+8. [Fundamentos do Flutter e Engenharia Mobile para a Banca](#8-fundamentos-do-flutter-e-engenharia-mobile-para-a-banca)
+   - 8.1 Arvore de Widgets, Elementos e Render Objects
+   - 8.2 Ciclo de Vida: StatelessWidget vs StatefulWidget
+   - 8.3 O Padrao Provider por Baixo dos Panos (InheritedWidget e O(1) Lookup)
+   - 8.4 SQLite em Producao: Transacoes Atomicas (ACID), Batching e ConflictAlgorithm
+   - 8.5 Paginacao Infinita: PagingController e Prevencao de Memory Leaks
+   - 8.6 Persistencia Leve: SharedPreferences e Chaves ISO
+   - 8.7 Componentes Graficos Externos: Primer, CachedNetworkImage e AwesomeDialog
+9. [Matriz de Casos de Borda e Seguranca Operacional (Edge Cases)](#9-matriz-de-casos-de-borda-e-seguranca-operacional-edge-cases)
+   - 9.1 Falha de Rede Durante a Rolagem do Catalogo
+   - 9.2 Cliques Repetidos e Concorrentes em "Recrutar"
+   - 9.3 Atributos com Valores Empatados e Resolucao via Reduce
+   - 9.4 Empate de Pontuacao na Rodada da Missao
+   - 9.5 Complexidade Assintotica do Set de Herois Utilizados
+   - 9.6 Idempotencia da Semeadura de Teste
+10. [Banco Estendido de Perguntas da Banca (Perguntas 8 a 15)](#10-banco-estendido-de-perguntas-da-banca-perguntas-8-a-15)
+11. [Checklist Matinal de Preparacao e Comandos de Execucao](#11-checklist-matinal-de-preparacao-e-comandos-de-execucao)
+    - 11.1 Comandos de Inicializacao do Servidor Mock e Aplicativo
+    - 11.2 Como Chavear a URL Base (Render vs Localhost)
+    - 11.3 Comandos de Teste e Analise Estatica
+    - 11.4 Resumo Mental em 3 Frases para Iniciar a Apresentacao
 
 ---
 
@@ -113,9 +142,192 @@ O arquivo `lib/core/di/configure_providers.dart` centraliza a instanciacao de to
 
 ---
 
-# 2. OS 5 HEROIS DE TESTE SEMEADOS (seedTestSquad)
+# 2. RASTREAMENTO TECNICO COMPLETO CLIQUE A CLIQUE DE TODO O APLICATIVO
 
-### 2.1 Justificativa Tecnica e Regra de Negocio do Slide 10
+### 2.0 O Ponto de Partida: Inicializacao do App (main.dart)
+
+Quando o aplicativo abre no celular:
+1. `lib/main.dart`: O metodo `main()` roda `ConfigureProviders.createDependencyTree()`.
+2. `lib/core/di/configure_providers.dart`: Instancia todas as pecas em cascata:
+   - `ApiClient` (aponta para a API no Render).
+   - `NetworkMapper` e `DatabaseMapper` (tradutores puros).
+   - `HeroDao` e `SquadDao` (que abrem a conexao unica com o SQLite `heroes_database.db` via `BaseDao`).
+   - `HeroRepositoryImpl` (recebe todas as pecas acima no construtor).
+3. O `MultiProvider` envelopa o aplicativo, disponibilizando o repositorio para todas as telas.
+4. A tela inicial `home_page.dart` e desenhada com 4 opcoes taticas de navegacao.
+
+---
+
+### 2.1 Fluxo: Clique em "Agentes" (Catalogo Infinito de Herois)
+
+#### O que o usuario faz:
+Toca no card "Agentes" na tela inicial.
+
+#### O caminho tecnico passo a passo:
+1. **Navegacao (UI)**: O `HomePage` executa `Navigator.push` e abre `heroes_catalog_page.dart`.
+2. **Inicializacao do Controlador**: O `_pagingController` da biblioteca `infinite_scroll_pagination` dispara automaticamente a busca da primeira pagina:
+   ```dart
+   fetchPage: (pageKey) => _heroRepository.getHeroes(page: pageKey, limit: 10)
+   ```
+3. **Repositorio (`hero_repository_impl.dart`)**:
+   - Calcula o offset SQL: `offset = (page * 10) - 10`. Na pagina 1, `offset = 0`.
+   - **Consulta o Cache Local Primeiro**: Chama `heroDao.selectAll(limit: 10, offset: 0)`.
+   - **Cenario A (Ja existem dados no SQLite)**: 
+     - O `DatabaseMapper.toHeroes()` converte as entidades do SQLite para `List<HeroModel>`.
+     - O repositorio entrega a lista para o `PagingController` imediatamente, sem usar internet.
+   - **Cenario B (Primeira vez, SQLite vazio)**:
+     - O repositorio chama `apiClient.getHeroes(page: 1, limit: 10)`.
+     - O `ApiClient` (`dio`) faz uma requisicao HTTP `GET /heroes?_page=1&_limit=10`.
+     - A resposta JSON vira `HeroNetworkEntity` (DTO).
+     - O `NetworkMapper.toHeroes()` converte o DTO para modelo puro `HeroModel`.
+     - O repositorio chama `databaseMapper.toHeroDatabaseEntities(heroes)`.
+     - O `HeroDao.insertAll()` grava os 10 herois na tabela `heroes` do SQLite dentro de uma transacao atomica (`db.transaction()`).
+     - O repositorio devolve a lista para a UI.
+4. **Renderizacao dos Cards**:
+   - O `PagedListView` desenha cada item usando o `hero_card.dart`.
+   - O `CachedNetworkImage` baixa a imagem em segundo plano e salva o arquivo em disco para nunca mais precisar baixar.
+5. **Rolagem Infinita**: Quando o usuario rola ate o 10º heroi, o `PagingController` detecta o final da lista e dispara sozinho `page = 2` (`offset = 10`), repetindo o ciclo.
+
+---
+
+### 2.2 Fluxo: Clique em um Card de Heroi (Detalhes do Agente)
+
+#### O que o usuario faz:
+Toca em qualquer heroi listado no catalogo ou no esquadrao.
+
+#### O caminho tecnico passo a passo:
+1. **Navegacao (UI)**: O `HeroCard` executa `Navigator.push` abrindo `hero_detail_page.dart` passando o objeto `hero`.
+2. **Exibicao Instantanea**: A tela renderiza na hora os dados que ja vieram no objeto (imagem grande, nome, biografias).
+3. **Atualizacao em Segundo Plano (Slide 6)**:
+   - No `initState`, o callback `_fetchLatestDetails()` chama `heroRepository.getHeroById(hero.id)`.
+   - **Verificacao no Repositorio**:
+     - O repositorio consulta primeiro o `squadDao.selectMemberById(id)`. Se esse heroi for do esquadrao, retorna os dados locais do SQLite para preservar os pontos que ele ganhou em combates (+1).
+     - Se nao for do esquadrao, tenta buscar na API via `apiClient.getHeroById(id)` e atualiza o cache local. Se o celular estiver sem internet, recupera do cache via `heroDao.selectById(id)`.
+   - O metodo faz `setState()` e atualiza a tela com as barras de progresso do `primer_progress_bar` (`SegmentedBar`).
+
+---
+
+### 2.3 Fluxo: Clique em "Contrato Diario" (Sorteio e Recrutamento)
+
+#### O que o usuario faz:
+Toca em "Contrato Diario" na tela inicial.
+
+#### O caminho tecnico passo a passo:
+1. **Verificacao de Regra de 24 Horas (`daily_contract_page.dart`)**:
+   - O metodo `_checkDailyContract()` le o `SharedPreferences`.
+   - Compara a data salva na chave `daily_contract_last_date` com a data atual no formato `yyyy-MM-dd`.
+   - **Caso 1 (Ja sorteou hoje)**: Le o ID do heroi salvo em `daily_contract_hero_id`, busca no repositorio (`getHeroById`) e apenas exibe o card na tela.
+   - **Caso 2 (Novo dia ou primeiro acesso)**:
+     - Gera um numero aleatorio entre 1 e 560 (`Random().nextInt(560) + 1`).
+     - Chama `repo.getHeroById(randomId)` para obter o heroi sorteado.
+     - Grava no `SharedPreferences` a data de hoje e o ID sorteado.
+     - Checa no banco se esse heroi ja faz parte do esquadrao (`repo.isHeroInSquad(id)`).
+2. **Renderizacao do Card Exclusivo (Slide 7)**:
+   - O metodo `_buildDailyContractCard()` desenha estritamente o que o Slide 7 pede: **apenas** nome, imagem e os 6 powerstats em barras de progresso lineares.
+3. **Clique no Botao "Recrutar para o Esquadrao"**:
+   - Dispara o metodo `_recruitAgent()`.
+   - **Validacao de Capacidade**: Checa se `_squadCount >= 15`. Se o time estiver cheio, exibe um `AwesomeDialog` do tipo warning avisando que nao ha vagas.
+   - Se houver vaga, chama `repo.recruitHero(todaysHero)`:
+     - No repositorio, valida se ja esta no esquadrao via `squadDao.selectMemberById()`.
+     - Converte o heroi para entidade de banco via `databaseMapper.toHeroDatabaseEntity()`.
+     - Chama `squadDao.insertMember()`, inserindo o registro na tabela `squad` do SQLite.
+   - O botao muda de cor e fica desabilitado ("Agente ja no Esquadrao").
+   - Dispara um `AwesomeDialog` do tipo sucesso informando que o agente foi integrado ao time.
+
+---
+
+### 2.4 Fluxo: Clique em "Meu Esquadrao" (Gestao e Dispensa)
+
+#### O que o usuario faz:
+Toca em "Meu Esquadrao" na tela inicial.
+
+#### O caminho tecnico passo a passo:
+1. **Carregamento Local (`my_squad_page.dart`)**:
+   - Chama `repo.getSquadMembers()`.
+   - O repositorio executa `squadDao.selectAllMembers()`, que roda uma query direta no SQLite:
+     ```sql
+     SELECT * FROM squad ORDER BY name ASC
+     ```
+   - O `DatabaseMapper.toHeroes()` converte os registros para `HeroModel`.
+2. **Calculo do Papel Tatico (Slide 8)**:
+   - Para cada card renderizado, o subtitulo chama `hero.highestStatName`.
+   - Esse getter no `hero_model.dart` usa a funcao `reduce` do Dart para descobrir qual dos 6 atributos e o maior e exibe na tela (ex.: `Papel Tatico: STRENGTH`).
+3. **Caso de Esquadrao Vazio**:
+   - Se o banco nao tiver nenhum heroi, a tela exibe o botao **"Recrutar 5 Especialistas (Teste)"**.
+   - Ao clicar, o repositorio executa `seedTestSquad()`, que recruta Batman (70), Hulk (332), Flash (263), Wolverine (717) e Capitao America (149) no SQLite, liberando o acesso imediato as missoes.
+4. **Clique no Icone de Lixeira (Dispensa - Slide 9)**:
+   - Dispara um `AwesomeDialog` de confirmacao: *"Deseja dispensar [Nome] do esquadrao?"*.
+   - Ao confirmar: chama `repo.dismissHero(hero.id)`.
+   - O repositorio chama `squadDao.deleteMember(hero.id)`:
+     ```sql
+     DELETE FROM squad WHERE id = ?
+     ```
+   - O registro e removido do SQLite, a vaga e liberada (ex.: de 5/15 vai para 4/15) e a lista recarrega.
+
+---
+
+### 2.5 Fluxo: Clique em "Missoes" (Batalha Tatica e Evolucao de Nivel)
+
+#### O que o usuario faz:
+Toca em "Missoes" na tela inicial.
+
+#### O caminho tecnico passo a passo:
+
+##### Etapa 1: Validacao de Entrada e Sorteio da Crise (Slide 10)
+1. O metodo `_startMission()` em `mission_battle_page.dart` busca os membros do esquadrao no banco.
+2. **Trava de Seguranca**: Se o esquadrao tiver **menos de 5 herois**, a tela trava e exibe uma mensagem de bloqueio, impedindo o combate ate que o jogador recrute agentes.
+3. Se tiver 5 ou mais:
+   - Sorteia a quantidade de rounds da crise: `_random.nextInt(3) + 3` (sorteia 3, 4 ou 5 rounds).
+   - Para cada round:
+     - Sorteia um atributo em disputa (`Intelligence`, `Strength`, `Speed`, `Combat`, `Durability` ou `Power`).
+     - **Regra Anti-Clone do Slide 10**: Executa um laco `do-while` que gera um ID aleatorio e verifica se o ID ja pertence ao esquadrao do jogador. Se pertencer, sorteia novamente ate achar um vilao externo.
+     - Busca os dados do vilao via `repo.getHeroById(enemyId)`.
+
+##### Etapa 2: A Arena de Combate (Slide 11)
+1. A tela desenha o placar no topo (`Vitorias: 0, Derrotas: 0, Empates: 0`).
+2. **Card do Vilao**: Exibe o nome do vilao, a foto e o nome do atributo da disputa (ex.: `ATRIBUTO EM DISPUTA: STRENGTH`). **Os numeros do vilao ficam estritamente ocultos**, conforme exigido no Slide 11.
+3. **Grade de Escalacao 3x5**: Renderiza o esquadrao do jogador em formato 3x5 com avatares circulares (`CircleAvatar`) e o nome de cada agente.
+
+##### Etapa 3: Resolucao do Round e Bloqueio de Agente (Slide 12)
+1. O jogador toca no heroi que deseja enviar para o combate.
+2. O metodo `_fightRound(chosenHero)` e disparado:
+   - **Trava de Uso Unico (Slide 12)**: Registra o heroi no conjunto `_usedHeroIds.add(chosenHero.id)`. A partir deste momento, aquele heroi fica com opacidade 0.35, texto "Indisponivel" e nao pode mais ser clicado em nenhuma outra rodada desta missao.
+   - **Comparacao Matematica**:
+     ```dart
+     final heroValue = chosenHero.powerstats.getStatByName(stat);
+     final enemyValue = round.enemy.powerstats.getStatByName(stat);
+     ```
+     - Se `heroValue > enemyValue`: `_victories++`, adiciona o heroi a lista `_winningHeroes` e define `DialogType.success`.
+     - Se `heroValue < enemyValue`: `_defeats++` e define `DialogType.error`.
+     - Se `heroValue == enemyValue`: `_draws++` e define `DialogType.warning`.
+3. Dispara o `AwesomeDialog` mostrando o resultado da rodada com as pontuacoes reais reveladas.
+4. Ao clicar em "Continuar":
+   - Se ainda houver rounds na fila: incrementa `_currentRoundIndex++` no `setState()`. A tela atualiza instantaneamente para o proximo round com o novo inimigo e novo atributo.
+   - Se foi o ultimo round: invoca `_finishMission()`.
+
+##### Etapa 4: Fim da Missao e Evolucao Permanente no SQLite (Slide 13)
+1. O metodo `_finishMission()` avalia se o jogador venceu a campanha (`_victories > _defeats && _victories > 0`).
+2. **Se VENCEU ("Missao Cumprida!")**:
+   - Sorteia um dos herois que participou das vitorias:
+     ```dart
+     final evolvedHero = _winningHeroes[_random.nextInt(_winningHeroes.length)];
+     ```
+   - Sorteia um powerstat aleatorio (ex.: `Speed`).
+   - Chama o repositorio: `repo.evolveHeroStat(heroId: evolvedHero.id, statName: randomStat)`.
+   - O `SquadDao.incrementStat()` executa um comando SQL nativo de incremento no SQLite:
+     ```sql
+     UPDATE squad SET speed = speed + 1 WHERE id = ?
+     ```
+   - O heroi agora tem +1 ponto gravado permanentemente no banco local do dispositivo.
+   - Dispara o `AwesomeDialog` do tipo sucesso exibindo a foto do heroi vencedor e o anuncio: *"Bonus: +1 no atributo Speed!"*.
+3. **Se PERDEU ("Operacao Fracassada!")**:
+   - Dispara o `AwesomeDialog` do tipo erro exibindo o icone de derrota e o placar final, sem alterar o banco de dados.
+
+---
+
+# 3. OS 5 HEROIS DE TESTE SEMEADOS (seedTestSquad)
+
+### 3.1 Justificativa Tecnica e Regra de Negocio do Slide 10
 
 No Slide 10 da avaliacao do professor Taniro, ha uma trava rigida de negocio:
 > "O esquadrao precisa ter pelo menos 5 agentes para iniciar uma Missao."
@@ -126,7 +338,7 @@ Se a aplicacao dependesse unicamente do fluxo diario natural, o professor ou o a
 
 Para resolver essa restricao de avaliacao sem violar as regras de persistencia do SQLite, foi implementada a rotina de semeadura `seedTestSquad()` no `HeroRepositoryImpl`, acionada atraves de botoes de teste presentes na `MySquadPage` e na `MissionBattlePage`.
 
-### 2.2 Ficha Tecnica dos 5 Especialistas (Atributos Dominantes)
+### 3.2 Ficha Tecnica dos 5 Especialistas (Atributos Dominantes)
 
 Foram selecionados cirurgicamente 5 herois canonicos da Superhero API, onde cada um possui pontuacao maxima (100) exatamente em um dos 5 atributos principais exigidos nos Desafios de Crise do Slide 10:
 
@@ -140,7 +352,7 @@ Foram selecionados cirurgicamente 5 herois canonicos da Superhero API, onde cada
 
 Essa selecao garante que o jogador possua exatamente 1 especialista de nivel maximo para cada tipo de round que o sistema sortear durante o Desafio de Crise.
 
-### 2.3 Como a Semeadura Funciona no Codigo-Fonte
+### 3.3 Como a Semeadura Funciona no Codigo-Fonte
 
 A implementacao no `lib/data/repository/hero_repository_impl.dart` executa o seguinte fluxo assincrono:
 
@@ -168,9 +380,9 @@ Dessa forma, o esquadrao atinge instantaneamente 5 integrantes, destravando a en
 
 ---
 
-# 3. ANALISE METICULOSA DO SLIDE 12 E TODOS OS SLIDES DO PROFESSOR
+# 4. ANALISE METICULOSA DO SLIDE 12 E TODOS OS SLIDES DO PROFESSOR
 
-### 3.1 Slide 12: Execucao dos Rounds, Indicadores, Trava de Uso Unico e Avanco
+### 4.1 Slide 12: Execucao dos Rounds, Indicadores, Trava de Uso Unico e Avanco
 
 O Slide 12 representa o nucleo de controle da maquina de estados de combate da missao. Abaixo estao os 3 requisitos exigidos pelo professor Taniro e a demonstracao exata de como foram implementados no codigo-fonte:
 
@@ -234,34 +446,34 @@ O Slide 12 representa o nucleo de controle da maquina de estados de combate da m
 
 ---
 
-### 3.2 Slide 03: Servidor Mock json-server e Superhero API
+### 4.2 Slide 03: Servidor Mock json-server e Superhero API
 - **Requisito**: Consumir dados da Superhero API (Akabab) atraves de servidor REST simulado com `json-server`.
 - **Implementacao**:
   - O arquivo `backend/db.json` contem 563 super-herois.
   - Para flexibilidade e avaliacao em qualquer ambiente, a API foi disponibilizada tanto localmente (`npm start` na porta 3000) quanto em producao na nuvem no Render (`https://call-hero-pdm.onrender.com`).
   - O `ApiClient` (`dio`) suporta paginacao via query parameters `_page` e `_limit`.
 
-### 3.3 Slide 04: Hub de Navegacao (HomePage)
+### 4.3 Slide 04: Hub de Navegacao (HomePage)
 - **Requisito**: Tela principal com 4 opcoes de navegacao: Agentes, Contrato Diario, Meu Esquadrao e Missoes.
 - **Implementacao**:
   - `lib/ui/page/home_page.dart` renderiza uma lista vertical com 4 `ListTile` estilizados dentro de `Card`.
   - Navega diretamente utilizando `Navigator.push(context, MaterialPageRoute(...))`.
 
-### 3.4 Slide 05: Catalogo Geral de Agentes (HeroesCatalogPage)
+### 4.4 Slide 05: Catalogo Geral de Agentes (HeroesCatalogPage)
 - **Requisito**: Catalogo paginado com rolagem infinita exibindo cards com nome, alinhamento, atributos dominantes e aparencia.
 - **Implementacao**:
   - Utiliza o pacote `infinite_scroll_pagination` com `PagingController<int, HeroModel>`.
   - Cada item e renderizado pelo componente reutilizavel `HeroCard`.
   - Realiza persistencia em lote no SQLite via `HeroDao.insertAll()` com transacao atomica.
 
-### 3.5 Slide 06: Tela Detalhes do Agente (HeroDetailPage)
+### 4.5 Slide 06: Tela Detalhes do Agente (HeroDetailPage)
 - **Requisito**: Exibir a ficha completa do heroi (biografia, aparencia, trabalho, conexoes) com barras de atributos proporcionais usando `primer_progress_bar`. Carregar dados da API ou do banco local.
 - **Implementacao**:
   - Imagem em alta resolucao renderizada com `CachedNetworkImage`.
   - Os 6 powerstats utilizam o widget `SegmentedBar` do `primer_progress_bar` com escala proporcional (0 a 100).
   - No `initState`, busca dados atualizados atraves do `HeroRepository.getHeroById()`.
 
-### 3.6 Slide 07: Contrato Diario e Recrutamento (DailyContractPage)
+### 4.6 Slide 07: Contrato Diario e Recrutamento (DailyContractPage)
 - **Requisito**: Sorteio diario de 1 agente aleatorio. Exibir apenas nome, imagem e powerstats. Botao para recrutar com trava de maximo 15 agentes. Sorteio limitado a 1 vez por dia.
 - **Implementacao**:
   - O `SharedPreferences` armazena a chave `daily_contract_last_date` no formato `yyyy-MM-dd` e o ID do heroi em `daily_contract_hero_id`.
@@ -269,35 +481,35 @@ O Slide 12 representa o nucleo de controle da maquina de estados de combate da m
   - O card desenha estritamente apenas nome, imagem e barras de progresso lineares dos 6 atributos.
   - O botao de recrutamento valida a capacidade do esquadrao (`_squadCount >= 15`) e impede duplicatas.
 
-### 3.7 Slide 08: Gestao do Esquadrao Local (MySquadPage)
+### 4.7 Slide 08: Gestao do Esquadrao Local (MySquadPage)
 - **Requisito**: Listar exclusivamente os herois recrutados no SQLite (ate 15). Exibir papel tatico / maior atributo. Toque no card leva para Detalhes.
 - **Implementacao**:
   - Consulta a tabela `squad` via `HeroRepository.getSquadMembers()`.
   - O papel tatico e calculado funcionalmente no modelo de dominio atraves de `hero.highestStatName` usando `reduce`.
   - Exibe contador visual de ocupacao de vagas (`X / 15`).
 
-### 3.8 Slide 09: Detalhes do Meu Agente e Dispensa (HeroDetailPage)
+### 4.8 Slide 09: Detalhes do Meu Agente e Dispensa (HeroDetailPage)
 - **Requisito**: Ficha do heroi com botao "Dispensar do Esquadrao", liberando vaga no banco de dados. Exibir caixa de dialogo com `awesome_dialog`. Cache de imagem com `cached_network_image`.
 - **Implementacao**:
   - Botao vermelho "Dispensar do Esquadrao" exibido condicionalmente quando `isSquadMember == true`.
   - Dispara `AwesomeDialog` do tipo `DialogType.warning` solicitando confirmacao.
   - Ao confirmar, executa `HeroRepository.dismissHero(id)`, removendo o registro da tabela `squad` no SQLite.
 
-### 3.9 Slide 10: Iniciar Missao e Desafio de Crise (MissionBattlePage)
+### 4.9 Slide 10: Iniciar Missao e Desafio de Crise (MissionBattlePage)
 - **Requisito**: Trava de pelo menos 5 agentes no esquadrao. Sorteio aleatorio de 3 a 5 rounds. Em cada round, sorteia um atributo de teste dominante e um oponente do catalogo. Se sortear membro do esquadrao, deve sortear novamente.
 - **Implementacao**:
   - Trava no `initState`: se `squad.length < 5`, bloqueia o combate e exibe tela de aviso com atalhos de recrutamento.
   - Sorteio de rounds: `final int totalRounds = _random.nextInt(3) + 3;` (gera 3, 4 ou 5).
   - Regra anti-clone: loop `do { enemyId = ... } while (squadIds.contains(enemyId));`.
 
-### 3.10 Slide 11: Arena de Combate e Escalacao 3x5 (MissionBattlePage)
+### 4.10 Slide 11: Arena de Combate e Escalacao 3x5 (MissionBattlePage)
 - **Requisito**: Exibir imagem e nome do inimigo com atributos ocultos e nome do atributo em disputa. Escalacao de 1 agente em grid 3x5 com miniaturas circulares. Comparar atributo: maior vence, menor perde, igual empata.
 - **Implementacao**:
   - Card do Inimigo: exibe nome, imagem via `CachedNetworkImage` e badge textual com o nome do atributo, omitindo deliberadamente todos os numeros do vilao.
   - Grid de Escalacao: `GridView.builder` com `crossAxisCount: 3` (formato 3x5 para ate 15 herois), utilizando `CircleAvatar` e nome truncado.
   - Resolucao: metodo `_fightRound` executa a comparacao direta e pontua no placar.
 
-### 3.11 Slide 13: Fim da Missao e Evolucao Permanente (+1) no SQLite
+### 4.11 Slide 13: Fim da Missao e Evolucao Permanente (+1) no SQLite
 - **Requisito**: Sumario com total de vitorias e derrotas. Dialogo `awesome_dialog`: Sucesso se venceu mais da metade dos rounds ("Missao Cumprida!"), sorteando 1 heroi vencedor para ganhar +1 em powerstat aleatorio com imagem exibida. Erro se perdeu a maioria ("Operacao Fracassada!") com imagem de derrota.
 - **Implementacao**:
   - Avaliacao: `final bool overallVictory = _victories > _defeats && _victories > 0;`.
@@ -309,19 +521,19 @@ O Slide 12 representa o nucleo de controle da maquina de estados de combate da m
   - Em caso de Derrota:
     - Dispara `AwesomeDialog` com `DialogType.error`, exibindo icone de fracasso e placar final.
 
-### 3.12 Slide 14: Resumo dos Criterios e Conformidade Arquitetural
+### 4.12 Slide 14: Resumo dos Criterios e Conformidade Arquitetural
 - **Requisito**: Integracao obrigatoria de: `json-server`, `infinite_scroll_pagination`, `cached_network_image`, `primer_progress_bar`, `awesome_dialog`, `shared_preferences` e `sqflite`.
 - **Status**: 100% implementado, testado e validado sem erros ou advertencias no `flutter analyze`.
 
 ---
 
-# 4. DICIONARIO TECNICO ARQUIVO POR ARQUIVO, FUNCAO POR FUNCAO
+# 5. DICIONARIO TECNICO ARQUIVO POR ARQUIVO, FUNCAO POR FUNCAO
 
 Abaixo esta a analise exaustiva de cada um dos 23 arquivos Dart que compoem o projeto Call-Hero.
 
 ---
 
-### 4.1 Camada de Inicializacao e DI
+### 5.1 Camada de Inicializacao e DI
 
 #### `lib/main.dart`
 - **Papel**: Ponto de entrada do ciclo de vida da aplicacao Flutter.
@@ -337,7 +549,7 @@ Abaixo esta a analise exaustiva de cada um dos 23 arquivos Dart que compoem o pr
 
 ---
 
-### 4.2 Camada de Dominio
+### 5.2 Camada de Dominio
 
 #### `lib/domain/hero_model.dart`
 - **Papel**: Modelo puro e imutavel do super-heroi no dominio da aplicacao. Nao possui nenhuma dependencia de pacotes externos, SQLite ou HTTP.
@@ -369,7 +581,7 @@ Abaixo esta a analise exaustiva de cada um dos 23 arquivos Dart que compoem o pr
 
 ---
 
-### 4.3 Camada de Rede
+### 5.3 Camada de Rede
 
 #### `lib/data/network/client/api_client.dart`
 - **Papel**: Cliente HTTP responsavel por requisicoes remotas a API REST utilizando o pacote `dio`.
@@ -402,7 +614,7 @@ Abaixo esta a analise exaustiva de cada um dos 23 arquivos Dart que compoem o pr
 
 ---
 
-### 4.4 Camada de Banco de Dados SQLite
+### 5.4 Camada de Banco de Dados SQLite
 
 #### `lib/data/database/entity/hero_database_entity.dart`
 - **Papel**: Contrato de banco de dados e entidade tabular para armazenamento no SQLite.
@@ -449,7 +661,7 @@ Abaixo esta a analise exaustiva de cada um dos 23 arquivos Dart que compoem o pr
 
 ---
 
-### 4.5 Camada de Repositorio
+### 5.5 Camada de Repositorio
 
 #### `lib/data/repository/hero_repository.dart`
 - **Papel**: Interface abstrata que define o contrato de dados consumido pela UI.
@@ -479,7 +691,7 @@ Abaixo esta a analise exaustiva de cada um dos 23 arquivos Dart que compoem o pr
 
 ---
 
-### 4.6 Componentes Visuais
+### 5.6 Componentes Visuais
 
 #### `lib/ui/widgets/hero_card.dart`
 - **Papel**: Widget reaproveitavel de exibicao resumida de super-herois.
@@ -494,7 +706,7 @@ Abaixo esta a analise exaustiva de cada um dos 23 arquivos Dart que compoem o pr
 
 ---
 
-### 4.7 Telas da Interface
+### 5.7 Telas da Interface
 
 #### `lib/ui/page/home_page.dart`
 - **Papel**: Painel central (Hub) de navegacao do aplicativo Call-Hero.
@@ -553,11 +765,7 @@ Abaixo esta a analise exaustiva de cada um dos 23 arquivos Dart que compoem o pr
 
 ---
 
-# 5. BANCO DE PERGUNTAS DE ALTO NIVEL DA BANCA E RESPOSTAS SENIOR
-
-Abaixo estao as perguntas tecnicas mais provaveis que o professor Taniro C. Rodrigues pode realizar durante a arguicao individual, acompanhadas das respostas exatas fundamentadas no codigo-fonte.
-
----
+# 6. BANCO DE PERGUNTAS DE ALTO NIVEL DA BANCA E RESPOSTAS SENIOR
 
 ### Pergunta 1: "Como exatamente funciona a sua politica Offline-First? O que acontece se o usuario abrir o app no modo aviao?"
 **Resposta Senior**:
@@ -641,3 +849,403 @@ A operacao `reduce` itera linearmente sobre as 6 entradas em complexidade O(1) e
 Todas as classes de dados e infraestrutura sao instanciadas na inicializacao em `main.dart` atraves de `ConfigureProviders.createDependencyTree()`.
 As telas da interface nunca instanciam dependencias concretas diretamente com `new`. Elas consom o contrato abstrato `HeroRepository` atraves de `Provider.of<HeroRepository>(context, listen: false)`.
 Isso desacopla totalmente a camada de apresentacao da camada de dados: se amanha precisarmos trocar o `sqflite` por outro banco ou alterar o cliente HTTP `Dio`, nenhuma linha de codigo dos widgets da UI precisara ser modificada, respeitando os principios OCP e DIP do SOLID."
+
+---
+
+# 7. ROTEIRO DE DEMONSTRACAO PRATICA DE 5 MINUTOS PARA O PROFESSOR
+
+Se o professor pedir para voce demonstrar o aplicativo funcionando ao vivo no celular/emulador, siga exatamente este roteiro em 5 passos:
+
+1. **Passo 1: Mostrar o Hub Inicial e o Catalogo (Slides 4 e 5)**:
+   - Abra o app e mostre a `HomePage` com os 4 botoes.
+   - Toque em "Agentes". Role a lista para baixo para mostrar a rolagem infinita funcionando (`infinite_scroll_pagination`).
+   - Toque em qualquer heroi para mostrar a tela de detalhes com as barras de atributos do `primer_progress_bar`.
+2. **Passo 2: Mostrar o Contrato Diario (Slide 7)**:
+   - Volte e entre em "Contrato Diario".
+   - Mostre o card exclusivo (apenas nome, imagem e os 6 powerstats).
+   - Mostre o contador de vagas `Esquadrao: X/15`.
+   - Toque em "Recrutar para o Esquadrao" para recrutar o heroi sorteado. Mostre a caixa de dialogo de sucesso do `AwesomeDialog`.
+3. **Passo 3: Mostrar Meu Esquadrao e a Semeadura de Teste (Slides 8 e 10)**:
+   - Volte e entre em "Meu Esquadrao".
+   - Mostre os herois com o papel tatico exibido no subtitulo (`highestStatName`).
+   - Se o time tiver menos de 5 agentes, toque no botao **"Recrutar 5 Especialistas (Teste)"**.
+   - Mostre o esquadrao sendo preenchido instantaneamente com Batman, Hulk, Flash, Wolverine e Capitao America.
+4. **Passo 4: Executar uma Missao Tatica (Slides 10, 11 e 12)**:
+   - Volte e entre em "Missoes".
+   - Aponte para o banner do Desafio de Crise (mostrando de 3 a 5 rounds sorteados).
+   - Aponte para o card do vilao: mostre que os numeros do vilao estao ocultos e apenas o atributo da disputa esta visivel.
+   - Aponte para a grade 3x5 de escalacao dos seus agentes com avatares circulares.
+   - Toque em um heroi para lutar o round: mostre o dialogo do `AwesomeDialog` com o resultado e pontuacoes reais.
+   - Mostre que o heroi escalado agora ficou esmaecido e com o texto "Indisponivel" (trava de uso unico do Slide 12).
+5. **Passo 5: Concluir a Missao e Demonstrar a Evolucao (+1) no SQLite (Slide 13)**:
+   - Jogue os rounds restantes ate o final da missao.
+   - Mostre o dialogo final de "Missao Cumprida!" com a foto do heroi sorteado e o anuncio do bonus de +1 ponto.
+   - Volte em "Meu Esquadrao", toque no heroi que ganhou o bonus e mostre que o atributo dele aumentou e foi gravado no SQLite!
+
+---
+
+# 8. FUNDAMENTOS DO FLUTTER E ENGENHARIA MOBILE PARA A BANCA
+
+Para demonstrar dominio senior durante a arguicao, esta secao detalha o funcionamento interno do Flutter, da linguagem Dart e dos mecanismos de persistencia utilizados no projeto.
+
+---
+
+### 8.1 Arvore de Widgets, Elementos e Render Objects
+
+O Flutter opera com tres arvores sincronizadas para garantir alto desempenho grafico (60 a 120 FPS):
+
+```
+[Widget Tree] (Configuracao Imutavel, Declarativa e Barata)
+     |
+     v (Infla e instancia)
+[Element Tree] (Gerenciador Estrutural de Ciclo de Vida e Estado)
+     |
+     v (Comanda geometria e desenho)
+[RenderObject Tree] (Calculo de Layout, Geometria e Rasterizacao no Canvas)
+```
+
+1. **Widget Tree**: Descreve a configuracao visual da interface. Os widgets sao imutaveis (`immutable`). Quando o estado muda e o metodo `build()` e invocado, novos widgets sao instanciados em memoria com custo insignificante.
+2. **Element Tree**: Representa a instancia viva do widget na hierarquia. O `Element` retem o vinculo com o `State` (no caso de `StatefulWidget`) e decide se um `RenderObject` precisa ser reconstruido ou apenas atualizado quando um novo widget do mesmo tipo e chave (`Key`) e fornecido.
+3. **RenderObject Tree**: Responsavel pelo calculo geometrico estrito e pela pintura na GPU. Segue o principio basico do Flutter: *Constraints go down, Sizes go up, Parents set positions* (Restricoes descem, tamanhos sobem, pais definem posicoes).
+
+No Call-Hero, em [heroes_catalog_page.dart](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/ui/page/heroes_catalog_page.dart), a lista paginada reaproveita os elementos visuais atraves de virtualizacao (ListView), garantindo que apenas os cards visiveis na tela sejam renderizados na GPU.
+
+---
+
+### 8.2 Ciclo de Vida: StatelessWidget vs StatefulWidget
+
+A aplicacao divide seus componentes entre widgets sem estado e com estado:
+
+- **StatelessWidget** (exemplo: [HeroCard](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/ui/widgets/hero_card.dart)): Depende exclusivamente de propriedades imutaveis passadas em seu construtor. Possui apenas o metodo `build()`.
+- **StatefulWidget** (exemplo: [MissionBattlePage](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/ui/page/mission_battle_page.dart)): Mantem um objeto `State` persistente ao longo do tempo.
+
+O ciclo de vida completo do `StatefulWidget` no projeto segue a ordem:
+
+1. `createState()`: Cria a instancia viva do estado.
+2. `initState()`: Executado exatamente uma vez quando o elemento e inserido na arvore. E o local obrigatorio para inicializar controladores (`PagingController`), listeners e disparar requisicoes iniciais. **Regra de ouro**: `initState()` nunca pode ser marcado como `async`.
+3. `didChangeDependencies()`: Invocado imediatamente apos o `initState()` e sempre que um `InheritedWidget` (como o `Provider`) notificar alteracoes.
+4. `build()`: Metodo sincrono e puro que retorna a arvore de widgets a ser renderizada. Deve ser livre de efeitos colaterais de rede ou banco.
+5. `setState()`: Sinaliza ao framework que o estado interno mudou, agendando uma nova execucao de `build()` para o proximo frame.
+6. `dispose()`: Chamado quando o widget e removido definitivamente da arvore. E obrigatorio liberar recursos manuais para evitar **Memory Leaks** (vazamento de memoria).
+
+#### O Padrao Post-Frame Callback
+Em [hero_detail_page.dart](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/ui/page/hero_detail_page.dart#L28-L32), para consultar o banco apos a tela ser montada sem travar o primeiro desenho, utilizamos:
+```dart
+WidgetsBinding.instance.addPostFrameCallback((_) {
+  _fetchLatestDetails();
+});
+```
+Isso agenda a execucao assincrona para o instante exato apos o pipeline grafico ter desenhado o primeiro quadro, garantindo uma transicao de tela sem travamentos perceptíveis.
+
+---
+
+### 8.3 O Padrao Provider por Baixo dos Panos (InheritedWidget e O(1) Lookup)
+
+O pacote `provider` adotado em [configure_providers.dart](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/core/di/configure_providers.dart) e uma abstracao robusta construida sobre o mecanismo nativo `InheritedWidget`.
+
+- **Como o Flutter busca o Provider?**: Cada `Element` na arvore mantem internamente um mapa hash `_inheritedWidgets` herdado de seus ancestrais.
+- Quando executamos `Provider.of<HeroRepository>(context, listen: false)`, a chamada delega para `context.getElementForInheritedWidgetOfExactType<Provider<HeroRepository>>()`. Essa operacao e resolvida em **tempo constante O(1)**, sem percorrer a arvore de cima a baixo.
+- **Diferenca Crucial entre listen: true e listen: false**:
+  - `listen: true`: Registra uma dependencia formal. Se o provedor emitir um evento, o widget que chamou sera reconstruido.
+  - `listen: false`: Apenas obtem a referencia para invocar metodos imperativos (como cliques de botao ou inicializacoes no `initState`). Evita reconstrucoes desnecessarias e melhora a performance.
+
+---
+
+### 8.4 SQLite em Producao: Transacoes Atomicas (ACID), Batching e ConflictAlgorithm
+
+O plugin `sqflite` gerencia o banco relacional embarcado no aparelho:
+
+1. **Propriedades ACID via Transacao**: Em [hero_dao.dart](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/data/database/dao/hero_dao.dart#L44-L52), o salvamento em lote utiliza `db.transaction()`:
+   ```dart
+   await db.transaction((txn) async {
+     final batch = txn.batch();
+     for (final entity in entities) {
+       batch.insert('heroes', entity.toJson(), conflictAlgorithm: ConflictAlgorithm.replace);
+     }
+     await batch.commit(noResult: true);
+   });
+   ```
+   - **Atomicidade**: Se qualquer registro falhar, todo o lote e revertido (Rollback), impedindo corrupcao parcial do catalogo.
+   - **Batching**: O `batch.commit(noResult: true)` agrupa todas as instrucoes SQL em uma unica comunicacao com o kernel do SQLite. Sem o batch, cada `insert` dispararia uma gravacao fisica no disco (`fsync`), tornando a insercao de 10 registros ate 100 vezes mais lenta.
+2. **ConflictAlgorithm.replace**: Garante a idempotencia. Se um heroi com o mesmo `id` ja existir, os dados sao atualizados sem lancar excecao de violacao de chave primaria.
+
+---
+
+### 8.5 Paginacao Infinita: PagingController e Prevencao de Memory Leaks
+
+O componente [HeroesCatalogPage](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/ui/page/heroes_catalog_page.dart) utiliza o pacote `infinite_scroll_pagination`:
+
+- **Mecanica do PagingController**:
+  1. Escuta a rolagem da lista (`ScrollController`). Quando o usuario se aproxima do final (limite de gatilho), invoca o listener cadastrado com a proxima chave de pagina (`pageKey`).
+  2. Se a chamada retornar 10 itens (tamanho da pagina), executa `_pagingController.appendPage(newItems, nextPageKey)`.
+  3. Se a chamada retornar menos de 10 itens ou lista vazia, executa `_pagingController.appendLastPage(newItems)`, informando que nao ha mais dados a carregar.
+  4. Em caso de falha de rede, atribui `_pagingController.error = error`, exibindo o botao de retry na tela.
+- **Liberacao de Recursos (`dispose`)**:
+  ```dart
+  @override
+  void dispose() {
+    _pagingController.dispose();
+    super.dispose();
+  }
+  ```
+  Se o controlador nao for liberado no `dispose()`, os listeners de rolagem continuam referenciados em memoria global, gerando vazamento de memoria.
+
+---
+
+### 8.6 Persistencia Leve: SharedPreferences e Chaves ISO
+
+O [DailyContractPage](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/ui/page/daily_contract_page.dart) gerencia a regra do Slide 07:
+
+- O `SharedPreferences` persiste pares chave-valor no armazenamento de preferencias do sistema operacional (arquivo XML no Android em `/data/data/<package>/shared_prefs`, e `NSUserDefaults` plist no iOS).
+- **Sanitizacao da Chave de Data**: Para comparar se o contrato ja foi utilizado hoje sem problemas com mudancas de hora ou fuso horario, a data atual e formatada de forma estrita em padrao ISO:
+  ```dart
+  final String today = DateTime.now().toIso8601String().substring(0, 10); // Ex: '2026-10-06'
+  ```
+  Isso isola o ano, mes e dia, impedindo que diferencas de milissegundos permitam sorteios indevidos no mesmo dia civil.
+
+---
+
+### 8.7 Componentes Graficos Externos: Primer, CachedNetworkImage e AwesomeDialog
+
+1. **primer_progress_bar**:
+   - Desenvolvido seguindo as especificacoes do GitHub Primer Design System.
+   - Renderiza barras segmentadas proporcionais com cantos arredondados e suporte a multiplas cores de acordo com o atributo de combate.
+2. **cached_network_image**:
+   - Gerencia cache multinivel:
+     - **Nivel 1 (RAM)**: Guarda as imagens decodificadas na memoria volátil para renderizacao instantanea.
+     - **Nivel 2 (Disco)**: Persiste os bytes brutos no cache local do dispositivo para sobrevivencia ao modo aviao.
+   - Fornece construtores declarativos para `placeholder` (indicador de carregamento) e `errorWidget` (icone de fallback em caso de URL corrompida).
+3. **awesome_dialog**:
+   - Cria janelas de dialogo modais com transicoes animadas nativas (`AnimType.scale`).
+   - Fornece tipagem semantica: `DialogType.success` (icone verde animado), `DialogType.error` (icone vermelho animado) e `DialogType.warning` (icone de alerta).
+   - Bloqueia o fechamento acidental ao configurar `dismissOnTouchOutside: false`.
+
+---
+
+# 9. MATRIZ DE CASOS DE BORDA E SEGURANCA OPERACIONAL (EDGE CASES)
+
+Esta secao documenta os cenarios criticos de teste e a forma como o codigo do Call-Hero se comporta defensivamente em cada situacao.
+
+---
+
+### 9.1 Falha de Rede Durante a Rolagem do Catalogo
+- **Cenario**: O usuario desce a rolagem do catalogo e o sinal de internet cai no meio da requisicao da pagina 3.
+- **Comportamento do Codigo**:
+  1. O [ApiClient](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/data/network/client/api_client.dart) detecta o erro do `Dio` (`DioException`) e lanca uma `NetworkException`.
+  2. O [HeroRepositoryImpl](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/data/repository/hero_repository_impl.dart) intercepta a excecao e tenta consultar o cache local no SQLite via `HeroDao.selectAll()`.
+  3. Se a pagina 3 nunca tiver sido baixada e o banco estiver vazio para aquele offset, o erro e propagado para o `_pagingController.error`.
+  4. O widget `newPageErrorIndicatorBuilder` renderiza uma mensagem clara informando a indisponibilidade de conexao com um botao "Tentar Novamente", sem fechar o app ou corromper a lista ja carregada.
+
+---
+
+### 9.2 Cliques Repetidos e Concorrentes em "Recrutar"
+- **Cenario**: O usuario pressiona o botao "Recrutar para o Esquadrao" varias vezes rapidamente (Double-Tap / Race Condition).
+- **Comportamento do Codigo**:
+  1. Na primeira invocacao em [DailyContractPage](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/ui/page/daily_contract_page.dart), a variavel de controle `_isRecruiting` e definida como `true`, desabilitando o botao imediatamente no proximo redesenho.
+  2. No [HeroRepositoryImpl](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/data/repository/hero_repository_impl.dart#L71-L82), o metodo `recruitHero()` executa uma checagem sincronizada no banco SQLite:
+     ```dart
+     final isAlreadyMember = await isHeroInSquad(hero.id);
+     if (isAlreadyMember) return false;
+     ```
+  3. Caso uma segunda execucao ultrapasse o estado da tela, ela e barrada pelo banco, retornando `false` e impedindo registros duplicados na tabela `squad`.
+
+---
+
+### 9.3 Atributos com Valores Empatados e Resolucao via Reduce
+- **Cenario**: Um heroi possui pontuacao maxima empatada entre dois atributos (exemplo: Forca 80 e Combate 80).
+- **Comportamento do Codigo**:
+  - Em [hero_model.dart](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/domain/hero_model.dart#L107-L113), o calculo funcional e definido como:
+    ```dart
+    stats.entries.reduce((curr, next) => curr.value >= next.value ? curr : next).key
+    ```
+  - Como o operador utilizado e `>=` (maior ou igual), o acumulador mantem a primeira chave registrada no Map cuja pontuacao nao seja estritamente superada pelas subsequentes.
+  - Isso garante **determinismo estrito**: o papel tatico do heroi sempre sera consistente entre reinicializacoes do app, sem flutuacoes aleatorias.
+
+---
+
+### 9.4 Empate de Pontuacao na Rodada da Missao
+- **Cenario**: O atributo do heroi do jogador e exatamente igual ao atributo sorteado do vilao (exemplo: Velocidade 60 vs Velocidade 60).
+- **Comportamento do Codigo**:
+  - O metodo `_fightRound()` em [mission_battle_page.dart](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/ui/page/mission_battle_page.dart#L131-L150) avalia:
+    ```dart
+    if (heroStat > enemyStat) {
+      _victories++;
+    } else if (heroStat < enemyStat) {
+      _defeats++;
+    } else {
+      _draws++;
+    }
+    ```
+  - Em caso de igualdade, dispara um `AwesomeDialog` com `DialogType.warning` informando "Empate Tatico!".
+  - Na regra final de encerramento do Slide 13 (*"Se venceu mais da metade dos rounds"*), a condicao avaliada e:
+    ```dart
+    final bool overallVictory = _victories > _defeats && _victories > 0;
+    ```
+  - Portanto, empates nao computam vitoria para o esquadrao, exigindo que o jogador realmente supere o adversario em numero de rounds.
+
+---
+
+### 9.5 Complexidade Assintotica do Set de Herois Utilizados
+- **Cenario**: A tela de batalha precisa verificar se cada um dos herois escalados na grade 3x5 ja foi utilizado na rodada atual.
+- **Comportamento do Codigo**:
+  - Declarado como `final Set<int> _usedHeroIds = {};`.
+  - A operacao `_usedHeroIds.contains(hero.id)` possui complexidade assintotica **O(1)** (busca em tabela hash).
+  - Se tivessemos utilizado uma `List<int>`, a complexidade seria **O(N)** para cada item desenhado. Com 15 cards sendo avaliados em cada frame de animacao, o `Set` garante custo computacional zero e eliminacao de qualquer engasgo de renderizacao (jank).
+
+---
+
+### 9.6 Idempotencia da Semeadura de Teste
+- **Cenario**: O usuario toca repetidas vezes no botao "Recrutar 5 Especialistas (Teste)" em `MySquadPage`.
+- **Comportamento do Codigo**:
+  - O metodo `seedTestSquad()` no [HeroRepositoryImpl](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/data/repository/hero_repository_impl.dart#L104-L121) itera sobre os 5 especialistas e executa:
+    ```dart
+    final inSquad = await isHeroInSquad(seed.id);
+    if (!inSquad) {
+      await recruitHero(seed);
+    }
+    ```
+  - Se o especialista ja residir no banco, a insercao e ignorada. Se o esquadrao ja contiver os 5 herois, a operacao e 100% idempotente (nao altera o estado e nao consome vagas excedentes).
+
+---
+
+# 10. BANCO ESTENDIDO DE PERGUNTAS DA BANCA (PERGUNTAS 8 A 15)
+
+Complemento estrategico para assegurar nota maxima na arguicao tecnica do Professor Taniro.
+
+---
+
+### Pergunta 8: "Por que voce implementou dispose() no PagingController em HeroesCatalogPage?"
+**Resposta Senior**:
+"Professor, no Flutter, controladores que gerenciam listeners e eventos de rolagem, como o `PagingController` do pacote `infinite_scroll_pagination`, mantem vinculos fortes na memoria com o `ScrollController` e os canais de eventos.
+Se o usuario sair do Catalogo e retornar a `HomePage`, o widget e destruido, mas se o controlador nao for liberado no metodo `dispose()`, ele continua registrado no garbage collector do Dart, criando um **vazamento de memoria (Memory Leak)**. Implementar o `dispose()` explicitamente garante a liberacao imediata dos recursos alocados."
+
+---
+
+### Pergunta 9: "Explique o mapeamento bidirecional no DatabaseMapper e por que campos como height e weight foram serializados como JSON no SQLite."
+**Resposta Senior**:
+"O SQLite e um banco de dados relacional que suporta nativamente tipos primitivos (INTEGER, REAL, TEXT, BLOB), mas nao suporta listas aninhadas em colunas.
+No modelo de dominio `HeroModel`, atributos como `height`, `weight` e `aliases` sao representados como `List<String>`.
+No [DatabaseMapper](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/data/database/database_mapper.dart), serializamos essas listas em formato JSON utilizando `jsonEncode` na gravacao para a entidade [HeroDatabaseEntity](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/data/database/entity/hero_database_entity.dart) e deserializamos com `jsonDecode` na leitura.
+Essa decisao evitou a criacao de 3 tabelas associativas adicionais com chaves estrangeiras (1:N), simplificando a persistencia local sem perda de tipagem no dominio."
+
+---
+
+### Pergunta 10: "No Slide 07, como voce garante que o usuario nao consiga burlar o sorteio diario alterando a hora do relogio local?"
+**Resposta Senior**:
+"Em uma aplicacao de producao comercial conectada a um backend proprio, o carimbo de data/hora (timestamp) deve ser validado via cabecalho do servidor HTTP (exemplo: header `Date`).
+No escopo academico do projeto baseado em mock local (`json-server`), a restricao foi modelada de forma robusta no cliente atraves do `SharedPreferences`, persistindo o dia civil no formato ISO `yyyy-MM-dd`. Caso o aplicativo seja reiniciado, o sistema checa a chave gravada e impede novos sorteios ate que o sistema registre um novo dia de calendario."
+
+---
+
+### Pergunta 11: "Por que todas as entidades de rede (HeroNetworkEntity) utilizam null-coalescing defensivo em vez de confiar no payload?"
+**Resposta Senior**:
+"Em desenvolvimento mobile profissional, a camada de rede nunca deve confiar cegamente na integridade dos dados retornados por APIs externas.
+Na Superhero API, diversos herois possuem campos como `fullName`, `placeOfBirth` ou arrays de atributos vazios (`null`).
+No arquivo [hero_network_entity.dart](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/data/network/entity/hero_network_entity.dart), implementamos conversores de fabrica com operadores null-coalescing (`?? ''`, `?? 0`, `?? []`).
+Isso impede que uma resposta inesperada da API dispare uma `TypeError` em tempo de execucao, blindando o aplicativo contra fechamentos repentinos (crashes)."
+
+---
+
+### Pergunta 12: "O que e a Superhero API e por que o backend/db.json possui 563 herois em vez dos 731 originais?"
+**Resposta Senior**:
+"A base utilizada e o dataset da Superhero API compilado por Akabab, que padroniza os personagens das principais editoras (Marvel, DC, Dark Horse).
+O arquivo original continha 731 registros brutos, muitos com imagens descontinuadas ou registros duplicados. O arquivo `backend/db.json` fornecido contem uma selecao curada de 563 super-herois com metadados e imagens ativas, servindo como a massa de dados homologada para o `json-server`."
+
+---
+
+### Pergunta 13: "Como funciona a animacao e a pilha de navegacao do AwesomeDialog no Flutter?"
+**Resposta Senior**:
+"O pacote `awesome_dialog` utiliza internamente a pilha de navegacao do `Navigator`, abrindo uma rota modal do tipo `PageRouteBuilder` com uma camada de barreira semi-transparente (`ModalBarrier`).
+A animacao `AnimType.scale` e executada por um `ScaleTransition` acoplado a um `AnimationController` nativo.
+Quando o dialogo e exibido, ele retem o foco da tela. Quando o usuario clica em um botao de acao, o callback e executado e o modal e removido da pilha (`Navigator.pop()`), restabelecendo o fluxo normal de interacao com a tela hospedeira."
+
+---
+
+### Pergunta 14: "Se a aplicacao escalasse para 100.000 herois, quais seriam os gargalos e como a arquitetura atual se comportaria?"
+**Resposta Senior**:
+"Nossa arquitetura em camadas esta preparada para escalabilidade:
+1. **Rede e UI**: O catalogo utiliza paginacao sob demanda (10 itens por vez) com `infinite_scroll_pagination` e virtualizacao de `ListView`. Mesmo com 100.000 herois na API, a memoria do dispositivo consumira apenas os dados das paginas navegadas.
+2. **Gargalo Potencial**: No SQLite local, consultas sem indice poderiam degradar com 100.000 registros. A solucao seria criar um indice explicito na coluna `id` (`CREATE INDEX idx_heroes_id ON heroes(id);`) e paginar as consultas de selecao local com `LIMIT` e `OFFSET` indexados, o que ja esta implementado no `HeroDao`."
+
+---
+
+### Pergunta 15: "Qual a diferenca fundamental entre o padrao Active Record e o padrao Data Mapper / DAO implementado no Call-Hero?"
+**Resposta Senior**:
+"No padrao **Active Record**, o proprio modelo de dominio e responsavel por saber como se salvar no banco de dados (exemplo: `hero.save()` ou `hero.delete()`), misturando regras de negocio com codigo SQL.
+No Call-Hero, adotamos o padrao **Data Mapper / DAO**:
+- O [HeroModel](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/domain/hero_model.dart) e um modelo puro de dominio, 100% agnostico de banco ou rede.
+- As responsabilidades de persistencia ficam isoladas nos DAOs ([HeroDao](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/data/database/dao/hero_dao.dart), [SquadDao](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/data/database/dao/squad_dao.dart)) e a transformacao de dados no [DatabaseMapper](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/data/database/database_mapper.dart).
+Isso segue rigorosamente o principio da Responsabilidade Unica (SRP) e permite testar as regras de negocio unitariamente sem precisar instanciar o SQLite."
+
+---
+
+# 11. CHECKLIST MATINAL DE PREPARACAO E COMANDOS DE EXECUCAO
+
+Utilize este roteiro rapido de 3 minutos para validar o ambiente antes da avaliacao.
+
+---
+
+### 11.1 Comandos de Inicializacao do Servidor Mock e Aplicativo
+
+1. **Testar / Iniciar o Backend Mock Local (Opcional se usar Nuvem)**:
+   ```bash
+   cd backend
+   npm install
+   npm start
+   ```
+   O servidor ficara disponivel em `http://localhost:3000/heroes`.
+
+2. **Executar o Aplicativo no Flutter**:
+   ```bash
+   # Execucao em Web/Chrome (Ideal para exibicao rapida na apresentacao)
+   flutter run -d chrome
+
+   # Ou execucao em emulador/dispositivo Android conectado
+   flutter run -d android
+   ```
+
+---
+
+### 11.2 Como Chavear a URL Base (Render vs Localhost)
+
+O app esta atualmente apontando para a nuvem no Render (`https://call-hero-pdm.onrender.com`), dispensando a necessidade de ligar o servidor Node.js local.
+Caso o professor peca para demonstrar o consumo no `localhost` local:
+
+Abra [configure_providers.dart](file:///media/natan_luc/HD%201TB/projetos/call-hero/call-hero-pdm/lib/core/di/configure_providers.dart#L24) e altere a URL base:
+```dart
+// Para ambiente de nuvem (Padrao atual):
+final apiClient = ApiClient(baseUrl: 'https://call-hero-pdm.onrender.com');
+
+// Para ambiente local com json-server:
+// final apiClient = ApiClient(baseUrl: 'http://localhost:3000'); // No Chrome
+// final apiClient = ApiClient(baseUrl: 'http://10.0.2.2:3000');   // No Emulador Android
+```
+
+---
+
+### 11.3 Comandos de Teste e Analise Estatica
+
+Execute os dois comandos de garantia de qualidade para provar que o projeto esta 100% em conformidade:
+
+1. **Analise Estatica de Codigo (Zero Avisos e Zero Erros)**:
+   ```bash
+   dart analyze --fatal-infos
+   ```
+   *Resultado esperado: `No issues found!`*
+
+2. **Bateria de Testes Automatizados**:
+   ```bash
+   flutter test
+   ```
+   *Resultado esperado: `All tests passed! (6/6)`*
+
+---
+
+### 11.4 Resumo Mental em 3 Frases para Iniciar a Apresentacao
+
+Quando o professor iniciar a avaliacao, abra o app e comece com estas 3 frases de impacto:
+
+1. *"Professor, o Call-Hero foi arquitetado seguindo rigorosamente o padrao Repository com Data Access Objects e politicas estritas de Offline-First, separando o catalogo descartavel da API do estado permanente de evolucao do esquadrao no SQLite."*
+2. *"Integramos 100% das bibliotecas exigidas nas especificacoes: infinite_scroll_pagination, primer_progress_bar, cached_network_image, awesome_dialog, shared_preferences e sqflite com transacoes atomicas."*
+3. *"O fluxo de missoes cumpre todas as regras do Desafio de Crise: sorteio anti-clone de inimigos, grade tatica 3x5 com trava de uso unico por round e evolucao permanente de +1 atributo para um heroi vencedor gravada diretamente no banco de dados."*
+
