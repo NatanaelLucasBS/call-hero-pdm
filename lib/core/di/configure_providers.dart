@@ -9,17 +9,7 @@ import '../../data/network/network_mapper.dart';
 import '../../data/repository/hero_repository.dart';
 import '../../data/repository/hero_repository_impl.dart';
 
-/// ============================================================================
-/// CONTAINER DE INJEÇÃO DE DEPENDÊNCIAS (IoC / DI - Aulas 02 e 12)
-/// ----------------------------------------------------------------------------
-/// - PAPEL: Montar a árvore de objetos e instâncias da aplicação.
-/// - O QUE PUXA: Instancia o [ApiClient], os mappers ([NetworkMapper], [DatabaseMapper]),
-///   os DAOs ([HeroDao], [SquadDao]) e o repositório ([HeroRepositoryImpl]).
-/// - QUEM USA: [main.dart] na inicialização, fornecendo a lista de Providers para
-///   o [MultiProvider]. Todas as telas consom o [HeroRepository] via context.
-/// - O QUE FAZ: Aplica o princípio da Inversão de Controle (IoC), garantindo que
-///   as telas dependam da abstração [HeroRepository] e não de implementações concretas.
-/// ============================================================================
+/// Container de Inversão de Controle (IoC) e injeção de dependências da aplicação.
 class ConfigureProviders {
   final List<SingleChildWidget> providers;
 

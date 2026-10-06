@@ -7,20 +7,7 @@ import 'package:provider/provider.dart';
 import '../../data/repository/hero_repository.dart';
 import '../../domain/hero_model.dart';
 
-/// ============================================================================
-/// TELA DE DETALHES DO AGENTE (Hero Details - Slides 6, 9 e Aula 12)
-/// ----------------------------------------------------------------------------
-/// - PAPEL: Exibir a ficha cadastral completa do herói (Atributos, Biografia,
-///   Aparência, Trabalho e Grupos).
-/// - O QUE PUXA: Recebe um [HeroModel] inicial e consome o [HeroRepository]
-///   para atualizar dados via `getHeroById(id)` e para dispensar o agente via `dismissHero(id)`.
-/// - QUEM USA: Navegada ao tocar em qualquer card no catálogo ([HeroesCatalogPage])
-///   ou na lista do esquadrão ([MySquadPage]).
-/// - O QUE FAZ:
-///   1. Renderiza os 6 atributos usando o pacote obrigatório [SegmentedBar] (`primer_progress_bar`).
-///   2. Atualiza os dados com a API/banco em segundo plano no `initState`.
-///   3. Permite dispensar o herói do esquadrão com diálogo de confirmação via [AwesomeDialog].
-/// ============================================================================
+/// Tela de detalhes com a ficha técnica completa do agente e opção de dispensa.
 class HeroDetailPage extends StatefulWidget {
   final HeroModel hero;
   final bool isSquadMember;
@@ -42,7 +29,7 @@ class _HeroDetailPageState extends State<HeroDetailPage> {
   void initState() {
     super.initState();
     _hero = widget.hero;
-    // Carrega preferencialmente da API com fallback para o banco local (Slide 6 e 9)
+    // Carrega preferencialmente da API com fallback para o banco local
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _fetchLatestDetails();
     });
@@ -121,7 +108,7 @@ class _HeroDetailPageState extends State<HeroDetailPage> {
     );
   }
 
-  /// Exibe diálogo de confirmação via AwesomeDialog antes de dispensar o agente (Slide 9).
+  /// Exibe diálogo de confirmação via AwesomeDialog antes de dispensar o agente.
   void _confirmDismiss(BuildContext context) {
     AwesomeDialog(
       context: context,
@@ -162,7 +149,7 @@ class _HeroDetailPageState extends State<HeroDetailPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Imagem em alta resolução (Slide 6)
+            // Imagem em alta resolução
             SizedBox(
               height: 320,
               child: CachedNetworkImage(
@@ -201,7 +188,7 @@ class _HeroDetailPageState extends State<HeroDetailPage> {
                     ),
                   const SizedBox(height: 16),
 
-                  // Seção: Atributos de Poder (Powerstats) com primer_progress_bar (Slide 6)
+                  // Seção: Atributos de Poder (Powerstats) com primer_progress_bar
                   Text(
                     'Atributos de Combate',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
@@ -264,7 +251,7 @@ class _HeroDetailPageState extends State<HeroDetailPage> {
                   _buildInfoRow('Parentes:', _hero.connections.relatives),
                   const SizedBox(height: 30),
 
-                  // Botão de Dispensa do Esquadrão (Slide 9)
+                  // Botão de Dispensa do Esquadrão
                   if (widget.isSquadMember)
                     SizedBox(
                       width: double.infinity,

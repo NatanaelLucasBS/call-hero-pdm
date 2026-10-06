@@ -1,6 +1,6 @@
 import 'hero_network_entity.dart';
 
-/// DTO que mapeia o envelope de resposta paginada da API local (Aula 06).
+/// DTO que mapeia o envelope de resposta paginada da API.
 class HttpPagedResult {
   final int first;
   final dynamic prev;

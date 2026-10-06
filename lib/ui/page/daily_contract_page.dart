@@ -9,19 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../data/repository/hero_repository.dart';
 import '../../domain/hero_model.dart';
 
-/// ============================================================================
-/// TELA DE CONTRATO DIÁRIO (Daily Contract - Slide 7)
-/// ----------------------------------------------------------------------------
-/// - PAPEL: Permitir o sorteio diário de 1 herói aleatório e o recrutamento para o esquadrão.
-/// - O QUE PUXA: Consome o [HeroRepository] para buscar o herói sorteado e persistir
-///   no SQLite do esquadrão, além do [SharedPreferences] para salvar a data do último sorteio.
-/// - QUEM USA: Acessada via botão 'Contrato Diário' na [HomePage].
-/// - O QUE FAZ:
-///   1. Garante a regra de 1 sorteio por dia persistida em [SharedPreferences].
-///   2. Renderiza o card exclusivo do Slide 7: apenas nome, imagem e os 6 powerstats.
-///   3. Permite recrutar o agente respeitando o teto de 15 membros e evitando duplicatas.
-///   4. Emite diálogos de feedback visual com [AwesomeDialog].
-/// ============================================================================
+/// Tela de sorteio e recrutamento diário de agentes via SharedPreferences e SQLite.
 class DailyContractPage extends StatefulWidget {
   const DailyContractPage({super.key});
 
@@ -45,7 +33,7 @@ class _DailyContractPageState extends State<DailyContractPage> {
     _checkDailyContract();
   }
 
-  /// Verifica se o usuário já realizou o sorteio diário na data atual (Slide 7).
+  /// Verifica se o usuário já realizou o sorteio diário na data atual.
   Future<void> _checkDailyContract() async {
     setState(() => _isLoading = true);
     final repo = Provider.of<HeroRepository>(context, listen: false);
@@ -74,7 +62,7 @@ class _DailyContractPageState extends State<DailyContractPage> {
       }
     }
 
-    // Se ainda não sorteou hoje, realiza o sorteio diário automaticamente (Slide 7)
+    // Se ainda não sorteou hoje, realiza o sorteio diário automaticamente
     await _drawNewHero();
   }
 
@@ -120,7 +108,7 @@ class _DailyContractPageState extends State<DailyContractPage> {
     }
   }
 
-  /// Recruta o herói sorteado para o esquadrão, respeitando o teto de 15 agentes (Slides 7 e 8).
+  /// Recruta o herói sorteado para o esquadrão, respeitando o teto de 15 agentes.
   Future<void> _recruitAgent() async {
     if (_todaysHero == null) return;
     final repo = Provider.of<HeroRepository>(context, listen: false);
@@ -172,7 +160,7 @@ class _DailyContractPageState extends State<DailyContractPage> {
     }
   }
 
-  /// Desenha o card exclusivo do Slide 7: imagem centralizada, nome do agente e container com os 6 powerstats em barras lineares.
+  /// Desenha o card com imagem centralizada, nome do agente e container com os 6 powerstats em barras lineares.
   Widget _buildDailyContractCard(HeroModel hero) {
     return Card(
       elevation: 4,
@@ -213,7 +201,7 @@ class _DailyContractPageState extends State<DailyContractPage> {
             ),
             const SizedBox(height: 14),
 
-            // Power Stats (Apenas os 6 atributos, conforme Slide 7)
+            // Power Stats (Apenas os 6 atributos)
             Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
@@ -329,7 +317,7 @@ class _DailyContractPageState extends State<DailyContractPage> {
                   ),
                   const SizedBox(height: 12),
 
-                  // Card com APENAS nome, imagem e power stats (Slide 7)
+                  // Card com apenas nome, imagem e power stats
                   if (_todaysHero != null) ...[
                     _buildDailyContractCard(_todaysHero!),
                     const SizedBox(height: 16),

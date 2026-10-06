@@ -7,19 +7,7 @@ import '../../domain/hero_model.dart';
 import '../widgets/hero_card.dart';
 import 'hero_detail_page.dart';
 
-/// ============================================================================
-/// TELA DO MEU ESQUADRÃO (Squad Management - Slides 8 e 9)
-/// ----------------------------------------------------------------------------
-/// - PAPEL: Gerenciar o time de agentes recrutados pelo jogador (máximo de 15).
-/// - O QUE PUXA: Consome o [HeroRepository] chamando `getSquadMembers()`, `getSquadCount()`
-///   e `dismissHero(id)`.
-/// - QUEM USA: Acessada via botão 'Meu Esquadrão' na [HomePage].
-/// - O QUE FAZ:
-///   1. Lista os heróis salvos no SQLite com indicador de vagas preenchidas (ex: 1/15).
-///   2. Exibe o papel tático de cada agente calculado via programação funcional (`reduce`).
-///   3. Permite dispensar agentes com confirmação via [AwesomeDialog].
-///   4. Oferece estado visual vazio quando não há agentes recrutados.
-/// ============================================================================
+/// Tela de gestão do esquadrão com visualização de papéis táticos e dispensa de membros.
 class MySquadPage extends StatefulWidget {
   const MySquadPage({super.key});
 
@@ -50,7 +38,7 @@ class _MySquadPageState extends State<MySquadPage> {
     }
   }
 
-  /// Confirma e processa a dispensa de um agente usando AwesomeDialog (Slide 9).
+  /// Confirma e processa a dispensa de um agente usando AwesomeDialog.
   void _confirmDismiss(HeroModel hero) {
     AwesomeDialog(
       context: context,
@@ -164,7 +152,7 @@ class _MySquadPageState extends State<MySquadPage> {
                           itemCount: _squadMembers.length,
                           itemBuilder: (context, index) {
                             final hero = _squadMembers[index];
-                            // Exibe o papel tático (maior atributo) conforme o Slide 8
+                            // Exibe o papel tático (maior atributo)
                             return HeroCard(
                               hero: hero,
                               subtitleOverride: 'Papel Tático: ${hero.highestStatName}',

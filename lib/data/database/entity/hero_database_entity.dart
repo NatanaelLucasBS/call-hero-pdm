@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-/// Contrato com nomes de tabelas e colunas para o SQLite (Aula 08).
+/// Contrato com nomes de tabelas e colunas para o SQLite.
 class HeroDatabaseContract {
   static const String heroesTable = 'heroes';
   static const String squadTable = 'squad';
@@ -47,7 +47,7 @@ class HeroDatabaseContract {
   static const String imgLgColumn = 'img_lg';
 }
 
-/// Entidade de banco de dados para representar um herói nas tabelas SQLite (Aula 08).
+/// Entidade de banco de dados para representar um herói nas tabelas SQLite.
 class HeroDatabaseEntity {
   final int id;
   final String name;

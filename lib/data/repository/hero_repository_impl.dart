@@ -6,23 +6,7 @@ import '../network/client/api_client.dart';
 import '../network/network_mapper.dart';
 import 'hero_repository.dart';
 
-/// ============================================================================
-/// IMPLEMENTAÇÃO DO REPOSITÓRIO (Repository Pattern - Aulas 08 e 12)
-/// ----------------------------------------------------------------------------
-/// - PAPEL: Atuar como ponto único de verdade (Single Source of Truth), orquestrando
-///   a política Offline-First entre a rede remota ([ApiClient]) e o banco local ([HeroDao]/[SquadDao]).
-/// - O QUE PUXA: Recebe por Inversão de Controle ([ConfigureProviders]) o [ApiClient],
-///   os mappers ([NetworkMapper], [DatabaseMapper]) e os DAOs ([HeroDao], [SquadDao]).
-/// - QUEM USA: As páginas da UI ([HeroesCatalogPage], [DailyContractPage], [MySquadPage],
-///   [MissionBattlePage], [HeroDetailPage]).
-/// - O QUE FAZ:
-///   1. [getHeroes]: Estratégia Cache-First: busca no SQLite local; se vazio, busca na API,
-///      converte via [NetworkMapper], persiste no SQLite via [HeroDao] e retorna à UI.
-///   2. [getHeroById]: Para membros do esquadrão, prioriza o SQLite (mantém atributos evoluídos);
-///      para o catálogo, busca da API ou fallback no SQLite se offline.
-///   3. [recruitHero]: Valida limite de 15 agentes, checa duplicatas e insere no SQLite.
-///   4. [evolveHeroStat]: Atualiza permanentemente no SQLite o stat aumentado (+1) pós-vitória.
-/// ============================================================================
+/// Implementação do repositório de heróis e orquestrador da política offline-first.
 class HeroRepositoryImpl implements HeroRepository {
   final ApiClient apiClient;
   final NetworkMapper networkMapper;
@@ -38,7 +22,7 @@ class HeroRepositoryImpl implements HeroRepository {
     required this.networkMapper,
   });
 
-  /// Busca heróis no cache local SQLite; se vazio, busca na API, salva no banco e retorna (Slide 5).
+  /// Busca heróis no cache local SQLite; se vazio, busca na API, salva no banco e retorna.
   @override
   Future<List<HeroModel>> getHeroes({
     required int page,
@@ -59,7 +43,7 @@ class HeroRepositoryImpl implements HeroRepository {
     return heroes;
   }
 
-  /// Retorna os detalhes de um herói pelo ID: preferencialmente da API ou do banco local em caso offline (Slide 6).
+  /// Retorna os detalhes de um herói pelo ID: preferencialmente da API ou do banco local em caso offline.
   @override
   Future<HeroModel?> getHeroById(int id) async {
     // Se for membro do esquadrão, prioriza os dados locais onde ficam os stats evoluídos (+1)
@@ -68,7 +52,7 @@ class HeroRepositoryImpl implements HeroRepository {
       return databaseMapper.toHero(squadMember);
     }
 
-    // Preferencialmente busca da API (Slide 6)
+    // Preferencialmente busca da API
     try {
       final networkEntity = await apiClient.getHeroById(id);
       final hero = networkMapper.toHero(networkEntity);
@@ -99,7 +83,7 @@ class HeroRepositoryImpl implements HeroRepository {
     return member != null;
   }
 
-  /// Recruta um novo herói, barrando a operação se já atingiu o limite de 15 agentes ou se já está no time (Slides 7 e 8).
+  /// Recruta um novo herói, barrando a operação se já atingiu o limite de 15 agentes ou se já está no time.
   @override
   Future<bool> recruitHero(HeroModel hero) async {
     final currentCount = await squadDao.countMembers();
@@ -128,7 +112,7 @@ class HeroRepositoryImpl implements HeroRepository {
     return squadDao.countMembers();
   }
 
-  /// Incrementa em +1 o stat vencedor no banco de dados local (Slide 13).
+  /// Incrementa em +1 o stat vencedor no banco de dados local.
   @override
   Future<void> evolveHeroStat({
     required int heroId,

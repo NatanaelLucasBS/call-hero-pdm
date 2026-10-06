@@ -1,4 +1,4 @@
-/// Camada de Rede: DTO que espelha o JSON da Superhero API (Aula 06).
+/// DTO que espelha o JSON da Superhero API.
 class HeroNetworkEntity {
   final int id;
   final String name;
@@ -80,7 +80,7 @@ class PowerstatsNetworkEntity {
   }
 }
 
-/// DTO das características físicas (Slide 5 e 6).
+/// DTO das características físicas.
 class AppearanceNetworkEntity {
   final String gender;
   final String race;
@@ -116,7 +116,7 @@ class AppearanceNetworkEntity {
   }
 }
 
-/// DTO da biografia e histórico civil (Slide 6).
+/// DTO da biografia e histórico civil.
 class BiographyNetworkEntity {
   final String fullName;
   final String alterEgos;
@@ -152,7 +152,7 @@ class BiographyNetworkEntity {
   }
 }
 
-/// DTO da profissão e base operacional (Slide 6).
+/// DTO da profissão e base operacional.
 class WorkNetworkEntity {
   final String occupation;
   final String base;
@@ -170,7 +170,7 @@ class WorkNetworkEntity {
   }
 }
 
-/// DTO das afiliações de equipes e parentescos (Slide 6).
+/// DTO das afiliações de equipes e parentescos.
 class ConnectionsNetworkEntity {
   final String groupAffiliation;
   final String relatives;
@@ -188,7 +188,7 @@ class ConnectionsNetworkEntity {
   }
 }
 
-/// DTO das 4 resoluções de imagens da Superhero API (Slide 5 e 6).
+/// DTO das 4 resoluções de imagens da Superhero API.
 class ImagesNetworkEntity {
   final String xs;
   final String sm;

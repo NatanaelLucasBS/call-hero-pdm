@@ -4,20 +4,7 @@ import 'package:sqflite/sqflite.dart';
 
 import '../entity/hero_database_entity.dart';
 
-/// ============================================================================
-/// DAO BASE E CONEXÃO COM O BANCO DE DADOS (SQLite Helper / BaseDao - Aula 08)
-/// ----------------------------------------------------------------------------
-/// - PAPEL: Gerenciar o ciclo de vida da conexão com o SQLite, versionamento
-///   e criação inicial das tabelas do banco local.
-/// - O QUE PUXA: Utiliza o pacote [sqflite] e [path] para localizar e abrir
-///   o arquivo 'heroes_database.db' no dispositivo do usuário.
-/// - QUEM USA: As classes [HeroDao] e [SquadDao] herdam de [BaseDao] para obter
-///   a instância do banco via método protegido [getDb].
-/// - O QUE FAZ:
-///   1. Abre a conexão via [openDatabase].
-///   2. No callback [onCreate], executa em [Batch] os scripts DDL de criação
-///      das tabelas 'heroes' (cache do catálogo) e 'squad' (membros do esquadrão).
-/// ============================================================================
+/// DAO base responsável por inicializar a conexão e criar as tabelas no SQLite.
 abstract class BaseDao {
   static const databaseVersion = 1;
   static const _databaseName = 'heroes_database.db';
@@ -45,7 +32,7 @@ abstract class BaseDao {
     );
   }
 
-  /// Cria a tabela de heróis utilizada para o cache offline do catálogo (Slide 5).
+  /// Cria a tabela de heróis utilizada para o cache offline do catálogo.
   void _createHeroesTableV1(Batch batch) {
     batch.execute(
       '''
@@ -85,7 +72,7 @@ abstract class BaseDao {
     );
   }
 
-  /// Cria a tabela de esquadrão com persistência de heróis recrutados e evolução de stats (Slides 8 e 13).
+  /// Cria a tabela de esquadrão com persistência de heróis recrutados e evolução de stats.
   void _createSquadTableV1(Batch batch) {
     batch.execute(
       '''

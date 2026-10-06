@@ -47,7 +47,7 @@ class HeroModel {
     );
   }
 
-  /// Aplica a evolução de +1 no atributo sorteado (Slide 13 - Vitória na Missão).
+  /// Aplica a evolução de +1 no atributo sorteado após vitória na missão.
   HeroModel evolveStat(String statName) {
     return copyWith(
       powerstats: powerstats.copyWith(
@@ -61,11 +61,11 @@ class HeroModel {
     );
   }
 
-  /// Retorna o nome do atributo dominante do herói para papel tático (Slide 8 e 9).
+  /// Retorna o nome do atributo dominante do herói para papel tático.
   String get highestStatName => powerstats.highestStatName;
 }
 
-/// Modela os 6 atributos vitais (Slide 6 e Combate Slides 10-12).
+/// Modela os 6 atributos vitais de combate.
 class Powerstats {
   final int intelligence;
   final int strength;
@@ -83,7 +83,7 @@ class Powerstats {
     required this.combat,
   });
 
-  /// Permite atualizar atributos pontualmente (Evolução +1 na vitória da missão - Slide 13).
+  /// Permite atualizar atributos pontualmente após vitória na missão.
   Powerstats copyWith({
     int? intelligence,
     int? strength,
@@ -102,7 +102,7 @@ class Powerstats {
     );
   }
 
-  /// Obtém o valor do atributo exigido no round pelo nome sorteado (Slide 11 - Resolução do Combate).
+  /// Obtém o valor do atributo exigido no round pelo nome sorteado.
   int getStatByName(String name) {
     switch (name.toLowerCase()) {
       case 'intelligence':
@@ -122,7 +122,7 @@ class Powerstats {
     }
   }
 
-  /// Retorna o nome do maior atributo usando Programação Funcional (reduce) - Papel Tático (Slide 8).
+  /// Retorna o nome do maior atributo usando Programação Funcional (reduce) para papel tático.
   /// Em caso de empate entre pontuações máximas (ex: Batman com 100 em Inteligência e Combate; Hulk com 100 em Força e Durabilidade),
   /// o operador '>=' preserva o primeiro atributo dominante de sua essência canônica (Batman = Inteligência, Hulk = Força).
   String get highestStatName {
@@ -141,7 +141,7 @@ class Powerstats {
   }
 }
 
-/// Características físicas e visuais do herói (Slide 5 e Slide 6).
+/// Características físicas e visuais do herói.
 class Appearance {
   final String gender;
   final String race;
@@ -160,7 +160,7 @@ class Appearance {
   });
 }
 
-/// Histórico, identidade civil e publicação do herói (Slide 6).
+/// Histórico, identidade civil e publicação do herói.
 class Biography {
   final String fullName;
   final String alterEgos;
@@ -181,7 +181,7 @@ class Biography {
   });
 }
 
-/// Profissão civil e base de operações do personagem (Slide 6).
+/// Profissão civil e base de operações do personagem.
 class Work {
   final String occupation;
   final String base;
@@ -192,7 +192,7 @@ class Work {
   });
 }
 
-/// Equipes e conexões familiares do personagem (Slide 6).
+/// Equipes e conexões familiares do personagem.
 class Connections {
   final String groupAffiliation;
   final String relatives;
@@ -203,7 +203,7 @@ class Connections {
   });
 }
 
-/// URLs das 4 resoluções de imagens da Superhero API (Slide 5 e Slide 6).
+/// URLs das 4 resoluções de imagens da Superhero API.
 class HeroImages {
   final String xs;
   final String sm;

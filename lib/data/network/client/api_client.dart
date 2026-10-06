@@ -4,19 +4,7 @@ import '../../../domain/exception/network_exception.dart';
 import '../entity/hero_network_entity.dart';
 import '../entity/http_paged_result.dart';
 
-/// ============================================================================
-/// CLIENTE HTTP DA APLICAÇÃO (Dio Client - Aula 06)
-/// ----------------------------------------------------------------------------
-/// - PAPEL: Realizar a comunicação de rede remota com a API REST (json-server no Render).
-/// - O QUE PUXA: Recebe a [baseUrl] no construtor e dispara requisições HTTP GET.
-/// - QUEM USA: [HeroRepositoryImpl], que consome o ApiClient para buscar heróis
-///   quando o cache local SQLite não possui os dados solicitados.
-/// - O QUE FAZ:
-///   1. Configura a instância do [Dio] com logs de requisição/resposta ([LogInterceptor]).
-///   2. [getHeroes]: Busca heróis com paginação via query parameters.
-///   3. [getHeroById]: Busca os dados detalhados de um herói específico por ID.
-///   4. Lança [NetworkException] em caso de status code >= 400.
-/// ============================================================================
+/// Cliente HTTP responsável por requisições remotas à API REST utilizando o Dio.
 class ApiClient {
   late final Dio _dio;
 
@@ -32,7 +20,7 @@ class ApiClient {
       );
   }
 
-  /// Busca lista paginada de heróis no json-server para o catálogo infinito (Slide 5).
+  /// Busca lista paginada de heróis no servidor para o catálogo infinito.
   Future<List<HeroNetworkEntity>> getHeroes({int? page, int? limit}) async {
     final response = await _dio.get(
       "/heroes",
@@ -63,7 +51,7 @@ class ApiClient {
     }
   }
 
-  /// Busca os dados completos de um único herói pelo seu ID (Slides 6 e 7).
+  /// Busca os dados completos de um único herói pelo seu ID.
   Future<HeroNetworkEntity> getHeroById(int id) async {
     final response = await _dio.get("/heroes/$id");
 

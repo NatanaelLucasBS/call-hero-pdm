@@ -8,7 +8,7 @@ import '../../data/repository/hero_repository.dart';
 import '../../domain/hero_model.dart';
 import 'daily_contract_page.dart';
 
-/// Modelo de uma rodada de crise na missão (Slide 10 e 11).
+/// Modelo de uma rodada de crise na missão.
 class MissionCrisisRound {
   final int roundNumber;
   final HeroModel enemy;
@@ -21,22 +21,7 @@ class MissionCrisisRound {
   });
 }
 
-/// ============================================================================
-/// TELA DE MISSÕES TÁTICAS E COMBATE (Tactical Missions - Slides 10 a 13)
-/// ----------------------------------------------------------------------------
-/// - PAPEL: Controlar a lógica de combate em turnos e evolução do esquadrão.
-/// - O QUE PUXA: Consome o [HeroRepository] para obter os membros do esquadrão,
-///   sortear vilões da API e salvar a evolução de atributos (+1 no SQLite).
-/// - QUEM USA: Acessada via botão 'Missões' na [HomePage].
-/// - O QUE FAZ:
-///   1. Valida o pré-requisito de no mínimo 5 membros no esquadrão (Slide 10).
-///   2. Gera aleatoriamente de 3 a 5 rounds de crise com inimigo e atributo testado.
-///   3. Oculta os atributos do inimigo, exibindo apenas imagem, nome e o stat em teste.
-///   4. Apresenta o esquadrão em grade circular 3x5 de avatares com nomes (Slide 11).
-///   5. Aplica lockout de uso único por herói durante toda a missão (Slide 12).
-///   6. Exibe diálogo de vitória com a foto do herói e evolução permanente (+1)
-///      ou diálogo de derrota caso o jogador perca mais da metade dos rounds (Slide 13).
-/// ============================================================================
+/// Tela de missões táticas e combate em turnos com gestão de crises e evolução de heróis.
 class MissionBattlePage extends StatefulWidget {
   const MissionBattlePage({super.key});
 
@@ -52,16 +37,16 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
   List<MissionCrisisRound> _rounds = [];
   int _currentRoundIndex = 0;
 
-  // Controle de uso único por herói na missão (Slide 12)
+  // Controle de uso único por herói na missão
   final Set<int> _usedHeroIds = {};
 
-  // Controle de placar e heróis que venceram rodadas (Slide 12 e 13)
+  // Controle de placar e heróis que venceram rodadas
   int _victories = 0;
   int _defeats = 0;
   int _draws = 0;
   final List<HeroModel> _winningHeroes = [];
 
-  // Atributos de teste conforme Slide 10 (Intelligence, Strength, Speed, Combat, Durability, Power)
+  // Atributos de teste de combate (Intelligence, Strength, Speed, Combat, Durability, Power)
   final List<String> _challengeStats = [
     'Intelligence',
     'Strength',
@@ -77,7 +62,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
     _startMission();
   }
 
-  /// Inicializa a missão sorteando de 3 a 5 rounds e inimigos fora do esquadrão (Slide 10).
+  /// Inicializa a missão sorteando de 3 a 5 rounds e inimigos fora do esquadrão.
   Future<void> _startMission() async {
     setState(() => _isLoading = true);
     final repo = Provider.of<HeroRepository>(context, listen: false);
@@ -85,7 +70,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
     try {
       final squad = await repo.getSquadMembers();
 
-      // Trava de segurança: esquadrão precisa ter pelo menos 5 agentes (Slide 10)
+      // Trava de segurança: esquadrão precisa ter pelo menos 5 agentes
       if (squad.length < 5) {
         if (mounted) {
           setState(() {
@@ -98,12 +83,12 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
 
       final squadIds = squad.map((h) => h.id).toSet();
 
-      // Sorteia de 3 a 5 rounds para o Desafio de Crise (Slide 10)
+      // Sorteia de 3 a 5 rounds para o Desafio de Crise
       final int totalRounds = _random.nextInt(3) + 3;
       final List<MissionCrisisRound> generatedRounds = [];
 
       for (int i = 0; i < totalRounds; i++) {
-        // Regra do Slide 10: Se sortear herói do esquadrão, sorteia novamente
+        // Regra anti-clone: Se sortear herói do esquadrão, sorteia novamente
         int enemyId;
         HeroModel? enemy;
         do {
@@ -154,7 +139,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
     }
   }
 
-  /// Resolve o combate da rodada comparando o atributo em disputa (Slides 11 e 12).
+  /// Resolve o combate da rodada comparando o atributo em disputa.
   Future<void> _fightRound(HeroModel chosenHero) async {
     final round = _rounds[_currentRoundIndex];
     final stat = round.testedStat;
@@ -162,14 +147,14 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
     final heroValue = chosenHero.powerstats.getStatByName(stat);
     final enemyValue = round.enemy.powerstats.getStatByName(stat);
 
-    // Marca o herói como usado nesta missão (Slide 12)
+    // Marca o herói como usado nesta missão
     _usedHeroIds.add(chosenHero.id);
 
     String roundTitle;
     String roundDesc;
     DialogType dialogType;
 
-    // Regra de Resolução do Slide 11:
+    // Regra de Resolução do Combate:
     // Herói > Inimigo = Sucesso | Herói < Inimigo = Falha | Iguais = Empate
     if (heroValue > enemyValue) {
       _victories++;
@@ -192,7 +177,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
 
     if (!mounted) return;
 
-    // Mostra o resultado do round e avança (Slide 12)
+    // Mostra o resultado do round e avança
     AwesomeDialog(
       context: context,
       dialogType: dialogType,
@@ -240,17 +225,17 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
     return 'Placar: $vText, $dText, $eText.';
   }
 
-  /// Finaliza a missão e dispara o feedback com evolução de +1 no SQLite (Slide 13).
+  /// Finaliza a missão e dispara o feedback com evolução de +1 no SQLite.
   Future<void> _finishMission() async {
-    // Regra do Slide 13: O jogador vence a missão quando supera a maioria das ameaças (vitórias > derrotas)
+    // O jogador vence a missão quando supera a maioria das ameaças (vitórias > derrotas)
     // Empates não pontuam para o vilão nem para o jogador.
     final bool overallVictory = _victories > _defeats && _victories > 0;
     final repo = Provider.of<HeroRepository>(context, listen: false);
 
     if (overallVictory && _winningHeroes.isNotEmpty) {
-      // Sorteia um dos heróis que participou da vitória (Slide 13)
+      // Sorteia um dos heróis que participou da vitória
       final evolvedHero = _winningHeroes[_random.nextInt(_winningHeroes.length)];
-      // Sorteia um powerstat aleatório para ganhar +1 (Slide 13)
+      // Sorteia um powerstat aleatório para ganhar +1
       final randomStat = _challengeStats[_random.nextInt(_challengeStats.length)];
 
       // Grava a evolução de +1 no SQLite
@@ -272,7 +257,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
                   ),
             ),
             const SizedBox(height: 12),
-            // Imagem do herói exibida na caixa de diálogo conforme Slide 13
+            // Imagem do herói exibida na caixa de diálogo
             ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: SizedBox(
@@ -336,7 +321,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
                   ),
             ),
             const SizedBox(height: 12),
-            // Imagem/ícone de derrota exibido na caixa de diálogo conforme Slide 13
+            // Imagem/ícone de derrota exibido na caixa de diálogo
             Container(
               width: 90,
               height: 90,
@@ -468,7 +453,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
             ),
             const SizedBox(height: 12),
 
-            // Banner do Desafio de Crise com indicação clara do total sorteado (Slide 10)
+            // Banner do Desafio de Crise com indicação clara do total sorteado
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
@@ -506,7 +491,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
             ),
             const SizedBox(height: 12),
 
-            // Card do Inimigo da Rodada (Slide 11)
+            // Card do Inimigo da Rodada
             // REGRA: "O app exibe a imagem e o nome do inimigo (não exibe seus atributos) além do nome do atributo em disputa"
             Card(
               elevation: 3,
@@ -558,7 +543,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
             ),
             const SizedBox(height: 20),
 
-            // Escalação: "Miniaturas apenas com nome e imagem circular em um grid 3x5" (Slide 11)
+            // Escalação: Miniaturas com nome e imagem circular em um grid 3x5
             Text(
               'Escale 1 Agente do seu Esquadrão:',
               style: Theme.of(context).textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
@@ -570,7 +555,7 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
             ),
             const SizedBox(height: 12),
 
-            // Grade 3x5 com miniaturas circulares (Slide 11)
+            // Grade 3x5 com miniaturas circulares
             GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -597,14 +582,14 @@ class _MissionBattlePageState extends State<MissionBattlePage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // Imagem Circular conforme Slide 11
+                            // Imagem Circular
                             CircleAvatar(
                               radius: 26,
                               backgroundColor: Colors.grey.shade200,
                               backgroundImage: CachedNetworkImageProvider(hero.images.sm),
                             ),
                             const SizedBox(height: 6),
-                            // Apenas nome conforme Slide 11
+                            // Apenas nome
                             Text(
                               hero.name,
                               textAlign: TextAlign.center,

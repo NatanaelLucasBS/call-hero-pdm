@@ -3,22 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import '../entity/hero_database_entity.dart';
 import 'base_dao.dart';
 
-/// ============================================================================
-/// DAO DE PERSISTÊNCIA DO ESQUADRÃO (SquadDao - Aulas 08 e 12)
-/// ----------------------------------------------------------------------------
-/// - PAPEL: Gerenciar a tabela 'squad' no SQLite local, onde ficam salvos os
-///   heróis recrutados pelo jogador e seus atributos evoluídos em missões.
-/// - O QUE PUXA: Consome a conexão SQLite de [BaseDao] e recebe [HeroDatabaseEntity].
-/// - QUEM USA: [HeroRepositoryImpl], ao recrutar novos heróis, dispensar agentes,
-///   listar o esquadrão, verificar duplicatas ou aplicar o bônus de vitória (+1).
-/// - O QUE FAZ:
-///   1. [countMembers]: Conta o total de heróis no esquadrão (limite de 15 agentes).
-///   2. [selectAllMembers]: Lista todos os membros recrutados.
-///   3. [selectMemberById]: Busca um membro do esquadrão para checagem ou detalhes.
-///   4. [insertMember]: Salva um herói no esquadrão (recrutamento).
-///   5. [deleteMember]: Remove um herói do esquadrão (dispensa).
-///   6. [updateMember]: Atualiza os atributos após vitória em missão (+1 stat).
-/// ============================================================================
+/// DAO para operações de persistência e evolução dos membros do esquadrão no SQLite.
 class SquadDao extends BaseDao {
   /// Conta o total de agentes atualmente recrutados no esquadrão.
   Future<int> countMembers() async {
@@ -76,7 +61,7 @@ class SquadDao extends BaseDao {
     );
   }
 
-  /// Incrementa em +1 um atributo específico do herói após vitória em combate (Slide 13).
+  /// Incrementa em +1 um atributo específico do herói após vitória em combate.
   Future<void> incrementStat({
     required int heroId,
     required String statName,

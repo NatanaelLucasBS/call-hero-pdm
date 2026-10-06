@@ -4,16 +4,7 @@ import 'package:provider/provider.dart';
 import 'core/di/configure_providers.dart';
 import 'ui/page/home_page.dart';
 
-/// ============================================================================
-/// PONTO DE ENTRADA DA APLICAÇÃO (Main Entrypoint - Aulas 02 e 12)
-/// ----------------------------------------------------------------------------
-/// - PAPEL: Inicializador do ciclo de vida da aplicação Flutter.
-/// - O QUE PUXA: Chama [ConfigureProviders.createDependencyTree] para resolver
-///   a árvore de dependências (DAOs, Mappers, ApiClient, Repository).
-/// - QUEM USA: O próprio framework Flutter na inicialização do app.
-/// - O QUE FAZ: Inicializa os bindings, injeta o [MultiProvider] globalmente e
-///   define o tema tático e a tela inicial ([HomePage]).
-/// ============================================================================
+/// Inicializa os bindings, constrói a árvore de dependências e inicia o aplicativo.
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 

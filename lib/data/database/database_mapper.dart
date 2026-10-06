@@ -2,19 +2,7 @@ import '../../domain/exception/mapper_exception.dart';
 import '../../domain/hero_model.dart';
 import 'entity/hero_database_entity.dart';
 
-/// ============================================================================
-/// MAPPER DA CAMADA DE BANCO DE DADOS (Database Mapper - Aula 13)
-/// ----------------------------------------------------------------------------
-/// - PAPEL: Isolar a camada de banco de dados, convertendo entidades tabulares
-///   do SQLite ([HeroDatabaseEntity]) em modelos de domínio ([HeroModel]) e vice-versa.
-/// - O QUE PUXA: Recebe [HeroDatabaseEntity] dos DAOs ou [HeroModel] do domínio.
-/// - QUEM USA: [HeroRepositoryImpl], para traduzir dados antes de persistir no
-///   SQLite ou antes de entregar os dados para as telas.
-/// - O QUE FAZ:
-///   1. [toHero] / [toHeroes]: Converte entidade SQLite plana em modelo estruturado de domínio.
-///   2. [toHeroDatabaseEntity] / [toHeroDatabaseEntities]: Converte modelo de domínio em entidade tabular.
-///   3. Lança [MapperException] tipada se houver falha de conversão.
-/// ============================================================================
+/// Mapper para conversão bidirecional entre entidades do SQLite e modelos de domínio.
 class DatabaseMapper {
   /// Converte uma HeroDatabaseEntity persistida no SQLite em HeroModel imutável de domínio.
   HeroModel toHero(HeroDatabaseEntity entity) {

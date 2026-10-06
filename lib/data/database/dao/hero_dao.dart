@@ -3,19 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import '../entity/hero_database_entity.dart';
 import 'base_dao.dart';
 
-/// ============================================================================
-/// DAO DE CACHE DO CATÁLOGO DE HERÓIS (HeroDao - Aula 08)
-/// ----------------------------------------------------------------------------
-/// - PAPEL: Executar operações CRUD na tabela 'heroes' do banco SQLite local.
-/// - O QUE PUXA: Consome a conexão SQLite herdada de [BaseDao] e recebe entidades
-///   [HeroDatabaseEntity] para inserção.
-/// - QUEM USA: [HeroRepositoryImpl], que consulta o [HeroDao] antes de tentar
-///   chamar a rede (estratégia Offline-First / Cache Local).
-/// - O QUE FAZ:
-///   1. [selectAll]: Consulta heróis paginados com LIMIT e OFFSET.
-///   2. [selectById]: Busca um herói específico no cache pelo seu ID.
-///   3. [insertAll]: Salva heróis recebidos da API em lote usando transação atômica.
-/// ============================================================================
+/// DAO de cache do catálogo de heróis no SQLite.
 class HeroDao extends BaseDao {
   /// Retorna lista paginada de heróis salvos no cache local.
   Future<List<HeroDatabaseEntity>> selectAll({
@@ -59,7 +47,7 @@ class HeroDao extends BaseDao {
     );
   }
 
-  /// Insere uma lista de heróis em lote utilizando transação atômica (Aula 08).
+  /// Insere uma lista de heróis em lote utilizando transação atômica.
   Future<void> insertAll(List<HeroDatabaseEntity> entities) async {
     final Database db = await getDb();
     await db.transaction((transaction) async {
